@@ -29,7 +29,7 @@
       </div>
 
       <p class="fnh-locations__count" id="fnh-location-count" aria-live="polite">
-        8 von 8 Standorten
+        3 von 8 Standorten
       </p>
     </div>
 
@@ -157,6 +157,12 @@
           <strong>Selbstständiges Training <span>↗</span></strong>
         </div>
       </a>
+    </div>
+
+    <div class="fnh-locations__show-all-wrap">
+      <button type="button" class="fnh-locations__show-all" id="fnh-location-show-all">
+        Alle Standorte <span>↗</span>
+      </button>
     </div>
 
     <p class="fnh-locations__empty" id="fnh-location-empty" hidden>
@@ -388,6 +394,51 @@
     font-size: 16px;
   }
 
+  #fnh-locations .fnh-locations__show-all-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 44px;
+  }
+
+  #fnh-locations .fnh-locations__show-all-wrap[hidden] {
+    display: none;
+  }
+
+  #fnh-locations .fnh-locations__show-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 15px 30px;
+    border: 1px solid var(--fnh-black);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--fnh-black);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease;
+  }
+
+  #fnh-locations .fnh-locations__show-all span {
+    font-size: 14px;
+    transition: transform .2s ease;
+  }
+
+  #fnh-locations .fnh-locations__show-all:hover {
+    background: var(--fnh-black);
+    color: #fff;
+  }
+
+  #fnh-locations .fnh-locations__show-all:hover span {
+    transform: translate(3px, -3px);
+  }
+
+  #fnh-locations .fnh-locations__show-all[hidden] {
+    display: none;
+  }
+
   #fnh-locations .fnh-sr-only {
     position: absolute;
     width: 1px;
@@ -457,7 +508,11 @@
     );
     var count = section.querySelector("#fnh-location-count");
     var empty = section.querySelector("#fnh-location-empty");
+    var showAllWrap = section.querySelector(".fnh-locations__show-all-wrap");
+    var showAllBtn = section.querySelector("#fnh-location-show-all");
     var total = cards.length;
+    var COLLAPSE_LIMIT = 3;
+    var expanded = total <= COLLAPSE_LIMIT;
 
     function cleanText(text) {
       return (text || "")
@@ -469,26 +524,37 @@
 
     function updateLocations() {
       var searchTerm = cleanText(input.value);
+      var isSearching = searchTerm.length > 0;
       var visibleCount = 0;
 
-      cards.forEach(function (card) {
+      cards.forEach(function (card, index) {
         var content = cleanText(
           (card.getAttribute("data-search") || "") + " " + card.textContent
         );
-        var match = !searchTerm || content.indexOf(searchTerm) !== -1;
+        var matchesSearch = !isSearching || content.indexOf(searchTerm) !== -1;
+        var withinLimit = expanded || isSearching || index < COLLAPSE_LIMIT;
+        var visible = matchesSearch && withinLimit;
 
-        card.classList.toggle("is-filtered", !match);
+        card.classList.toggle("is-filtered", !visible);
 
-        if (match) {
+        if (visible) {
           visibleCount++;
         }
       });
 
       count.textContent = visibleCount + " von " + total + " Standorten";
       empty.hidden = visibleCount !== 0;
+      showAllWrap.hidden = expanded || isSearching;
     }
 
     input.addEventListener("input", updateLocations);
+
+    showAllBtn.addEventListener("click", function () {
+      expanded = true;
+      updateLocations();
+    });
+
+    updateLocations();
 
     if ("IntersectionObserver" in window) {
       var reveal = new IntersectionObserver(function (entries) {
