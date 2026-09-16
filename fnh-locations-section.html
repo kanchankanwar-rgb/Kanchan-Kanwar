@@ -1,3 +1,9 @@
+<!--
+  Header text below uses data-reveal attributes for the sitewide
+  scroll-reveal effect (see fnh-scroll-reveal.html). Add that snippet
+  once on the page for these to fade/blur in on scroll; without it,
+  data-reveal has no matching CSS and the text just renders normally.
+-->
 <section id="fnh-locations">
   <div class="fnh-locations__container">
 
@@ -5,17 +11,17 @@
 
     <div class="fnh-locations__header">
       <div class="fnh-locations__heading">
-        <p class="fnh-locations__eyebrow">Standorte</p>
-        <h2>FNH in deiner Nähe.</h2>
+        <p class="fnh-locations__eyebrow" data-reveal data-reveal-blur>Standorte</p>
+        <h2 data-reveal data-reveal-blur data-reveal-delay="80">FNH in deiner Nähe.</h2>
       </div>
 
-      <p class="fnh-locations__intro">
+      <p class="fnh-locations__intro" data-reveal data-reveal-blur data-reveal-delay="140">
         Acht Standorte in der Ostschweiz. Gib deine Postleitzahl oder deinen Ort ein —
         wir zeigen dir, was dort möglich ist.
       </p>
     </div>
 
-    <div class="fnh-locations__filter-row">
+    <div class="fnh-locations__filter-row" data-reveal data-reveal-blur data-reveal-delay="200">
       <div class="fnh-locations__search-wrap">
         <label class="fnh-sr-only" for="fnh-location-search">
           Postleitzahl oder Ort
