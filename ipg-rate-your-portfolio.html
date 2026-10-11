@@ -1,0 +1,1808 @@
+<!--
+  IPG — Rate Your Property Portfolio (landing page + assessment + results)
+
+  Paste this whole file into ONE GoHighLevel "Custom Code" element on a
+  blank, full-width section of your funnel page. It contains:
+    1. Landing page (hero, benefits, problem, how it works, final CTA)
+    2. 12-question assessment (full-screen, progress bar, Previous button)
+    3. "Biggest challenge" qualification step (multi-select)
+    4. Lead gate (first name, email, optional mobile)
+    5. Instant results dashboard (rating gauge, level, category bars,
+       strongest area, biggest opportunity, next move, booking CTA)
+
+  Before publishing, edit the CONFIG block in the <script> at the bottom:
+    WEBHOOK_URL  -> URL of the GHL Workflow "Inbound Webhook" trigger
+    BOOKING_URL  -> your 15-Minute Portfolio Clarity Call booking page
+    PRIVACY_URL  -> your privacy policy page
+    LOGO_URL     -> IPG logo (light/white version for the dark background)
+
+  See GHL-SETUP-rate-your-portfolio.md for the custom fields, tags and
+  workflow mapping that the webhook payload fills.
+
+  Results links: adding ?ipg_answers=<12 digits 0-2>&first_name=Jane to the
+  page URL opens the results dashboard directly. The webhook sends this link
+  as "results_url" so emails/SMS can link back to the lead's own results.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<section id="ipg-rating">
+
+  <!-- ============ LANDING ============ -->
+  <div class="ipg-landing">
+
+    <header class="ipg-hero">
+      <div class="ipg-container ipg-hero__grid">
+        <div class="ipg-hero__copy">
+          <img class="ipg-logo" data-ipg-logo alt="Investor Partner Group" hidden>
+          <p class="ipg-eyebrow">Rate Your Property Portfolio</p>
+          <h1>How strong is the strategy behind your property portfolio?</h1>
+          <p class="ipg-lead">
+            Take the free 2-minute assessment and discover how your portfolio
+            performs across strategy, finance, property selection, cash flow and
+            long-term growth.
+          </p>
+          <div class="ipg-cta-row">
+            <button type="button" class="ipg-btn ipg-btn--primary" data-ipg-start>Rate my portfolio</button>
+            <p class="ipg-trust">Free <span>•</span> 12 Questions <span>•</span> Instant Result</p>
+          </div>
+        </div>
+
+        <!-- Illustrative preview of the results dashboard -->
+        <div class="ipg-hero__preview" aria-hidden="true">
+          <div class="ipg-preview-card">
+            <p class="ipg-preview-card__label">Your Property Portfolio Rating</p>
+            <div class="ipg-preview-card__score">
+              <svg viewBox="0 0 120 120" class="ipg-gauge">
+                <circle cx="60" cy="60" r="52" class="ipg-gauge__track"/>
+                <circle cx="60" cy="60" r="52" class="ipg-gauge__bar" style="stroke-dashoffset: 107.6"/>
+              </svg>
+              <div class="ipg-preview-card__num"><strong>67</strong><span>/100</span></div>
+            </div>
+            <p class="ipg-preview-card__level">Strategic Investor</p>
+            <ul class="ipg-preview-bars">
+              <li><span>Strategy</span><i style="--w:75%"></i></li>
+              <li><span>Finance</span><i class="is-gold" style="--w:50%"></i></li>
+              <li><span>Selection</span><i style="--w:75%"></i></li>
+              <li><span>Cash flow</span><i class="is-gold" style="--w:50%"></i></li>
+              <li><span>Management</span><i style="--w:83%"></i></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="ipg-band ipg-band--light">
+      <div class="ipg-container ipg-split">
+        <div>
+          <p class="ipg-eyebrow ipg-eyebrow--dark">Owning property vs building a portfolio</p>
+          <h2>Are you really building a property portfolio?</h2>
+          <p>
+            Buying an investment property is one thing. Building a portfolio that
+            continues growing without destroying your borrowing capacity, cash flow
+            or lifestyle is completely different.
+          </p>
+          <p>
+            Take the free Rate Your Property Portfolio assessment and see how your
+            current strategy stacks up.
+          </p>
+        </div>
+        <div class="ipg-discover">
+          <p class="ipg-discover__title">In less than 2 minutes you will discover:</p>
+          <ul>
+            <li>How prepared you are for your next property.</li>
+            <li>Where your portfolio strategy may have gaps.</li>
+            <li>Whether finance could restrict your next move.</li>
+            <li>How strong your property-selection process is.</li>
+            <li>Your biggest opportunity to improve your portfolio.</li>
+          </ul>
+          <button type="button" class="ipg-btn ipg-btn--primary" data-ipg-start>Rate my portfolio</button>
+          <p class="ipg-trust ipg-trust--dark">Free <span>•</span> 12 Questions <span>•</span> Instant Result</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="ipg-band">
+      <div class="ipg-container ipg-narrow">
+        <p class="ipg-eyebrow">The real problem</p>
+        <h2>Most people don't have a property problem. They have a strategy problem.</h2>
+        <p>
+          Someone can own two, three or even five properties and still have no clear
+          idea how the portfolio is supposed to get them to their financial goal.
+        </p>
+        <p>
+          The problem normally appears later: borrowing capacity gets tight, cash flow
+          starts hurting, equity is not being used efficiently, or every property is
+          doing exactly the same job.
+        </p>
+        <p>
+          Rate Your Property Portfolio looks at the fundamentals behind your portfolio
+          and identifies where your strategy is strong and where it may need attention.
+        </p>
+        <blockquote class="ipg-quote">
+          A successful property portfolio is not built by simply buying one good
+          property after another. It is built by making sure every property supports
+          the next one.
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="ipg-band ipg-band--deep">
+      <div class="ipg-container">
+        <p class="ipg-eyebrow">How it works</p>
+        <h2>Three steps. Two minutes.</h2>
+        <div class="ipg-steps">
+          <article class="ipg-step">
+            <span class="ipg-step__num">01</span>
+            <h3>Answer 12 questions</h3>
+            <p>Tell us how you are currently approaching finance, property selection, cash flow, growth and portfolio strategy.</p>
+          </article>
+          <article class="ipg-step">
+            <span class="ipg-step__num">02</span>
+            <h3>Get your rating</h3>
+            <p>We calculate your Property Portfolio Rating and identify your strongest and weakest areas.</p>
+          </article>
+          <article class="ipg-step">
+            <span class="ipg-step__num">03</span>
+            <h3>See your next move</h3>
+            <p>You receive a personalised breakdown showing the areas that may deserve attention before your next investment decision.</p>
+          </article>
+        </div>
+        <div class="ipg-center">
+          <button type="button" class="ipg-btn ipg-btn--primary" data-ipg-start>Start my rating →</button>
+          <p class="ipg-trust">Free <span>•</span> 12 Questions <span>•</span> Instant Result</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ============ ASSESSMENT APP (full-screen) ============ -->
+  <div class="ipg-app" data-ipg-app hidden role="dialog" aria-modal="true" aria-label="Rate Your Property Portfolio">
+    <div class="ipg-app__top">
+      <div class="ipg-app__brand">
+        <img class="ipg-logo ipg-logo--sm" data-ipg-logo alt="Investor Partner Group" hidden>
+        <span>Rate Your Property Portfolio</span>
+      </div>
+      <button type="button" class="ipg-app__exit" data-ipg-exit aria-label="Exit assessment">✕</button>
+    </div>
+    <div class="ipg-progress" aria-hidden="true"><i data-ipg-progress></i></div>
+
+    <div class="ipg-app__body" data-ipg-body>
+
+      <!-- Question screen -->
+      <div class="ipg-screen" data-ipg-screen="question">
+        <p class="ipg-q__meta"><span data-ipg-q-count></span> <span class="ipg-q__cat" data-ipg-q-cat></span></p>
+        <h2 class="ipg-q__title" data-ipg-q-title tabindex="-1"></h2>
+        <div class="ipg-answers" data-ipg-answers></div>
+        <button type="button" class="ipg-back" data-ipg-back>← Previous</button>
+      </div>
+
+      <!-- Challenge (qualification) screen -->
+      <div class="ipg-screen" data-ipg-screen="challenge">
+        <p class="ipg-q__meta">Almost there</p>
+        <h2 class="ipg-q__title" tabindex="-1">What's currently stopping you from making your next property move?</h2>
+        <p class="ipg-q__hint">Select all that apply.</p>
+        <div class="ipg-answers ipg-answers--multi" data-ipg-challenges></div>
+        <div class="ipg-actions">
+          <button type="button" class="ipg-back" data-ipg-back>← Previous</button>
+          <button type="button" class="ipg-btn ipg-btn--primary" data-ipg-challenge-next>Continue →</button>
+        </div>
+      </div>
+
+      <!-- Lead gate -->
+      <div class="ipg-screen" data-ipg-screen="lead">
+        <p class="ipg-q__meta">✓ Assessment complete</p>
+        <h2 class="ipg-q__title" tabindex="-1">Your rating is ready</h2>
+        <p class="ipg-q__hint">Where should we send your personalised Property Portfolio Report?</p>
+        <form class="ipg-form" data-ipg-form novalidate>
+          <label>
+            <span>First name</span>
+            <input name="first_name" type="text" autocomplete="given-name" required>
+          </label>
+          <label>
+            <span>Email</span>
+            <input name="email" type="email" autocomplete="email" required>
+          </label>
+          <label>
+            <span>Mobile <em>(optional)</em></span>
+            <input name="phone" type="tel" autocomplete="tel" inputmode="tel">
+          </label>
+          <p class="ipg-form__error" data-ipg-form-error aria-live="polite"></p>
+          <button type="submit" class="ipg-btn ipg-btn--primary ipg-btn--block">Show me my rating →</button>
+          <p class="ipg-form__privacy">
+            Your information is used to deliver your rating and, if requested, help you
+            understand your results. You can unsubscribe at any time.
+            <a data-ipg-privacy href="#" target="_blank" rel="noopener">Privacy policy</a>
+          </p>
+        </form>
+        <button type="button" class="ipg-back" data-ipg-back>← Previous</button>
+      </div>
+
+      <!-- Results dashboard -->
+      <div class="ipg-screen ipg-results" data-ipg-screen="results">
+        <div class="ipg-results__hero">
+          <p class="ipg-eyebrow" data-ipg-r-greeting>Your Property Portfolio Rating</p>
+          <div class="ipg-results__score">
+            <svg viewBox="0 0 120 120" class="ipg-gauge">
+              <circle cx="60" cy="60" r="52" class="ipg-gauge__track"/>
+              <circle cx="60" cy="60" r="52" class="ipg-gauge__bar" data-ipg-r-gauge/>
+            </svg>
+            <div class="ipg-results__num"><strong data-ipg-r-score>0</strong><span>/100</span></div>
+          </div>
+          <p class="ipg-results__level" data-ipg-r-level></p>
+          <h3 class="ipg-results__headline" data-ipg-r-headline></h3>
+          <p class="ipg-results__body" data-ipg-r-body></p>
+        </div>
+
+        <div class="ipg-results__panel">
+          <p class="ipg-panel__title">Category ratings</p>
+          <ul class="ipg-bars" data-ipg-r-bars></ul>
+        </div>
+
+        <div class="ipg-results__cards">
+          <article class="ipg-insight">
+            <p class="ipg-insight__label">Your strongest area</p>
+            <h4 data-ipg-r-strong></h4>
+            <p data-ipg-r-strong-copy></p>
+          </article>
+          <article class="ipg-insight ipg-insight--gold">
+            <p class="ipg-insight__label">Your biggest opportunity</p>
+            <h4 data-ipg-r-weak></h4>
+            <p data-ipg-r-weak-copy></p>
+          </article>
+        </div>
+
+        <article class="ipg-insight ipg-insight--next">
+          <p class="ipg-insight__label">Your next move</p>
+          <p data-ipg-r-next></p>
+        </article>
+
+        <div class="ipg-results__cta">
+          <h3>Turn your rating into your next property move</h3>
+          <p>Book a complimentary 15-minute Portfolio Clarity Call with an IPG Property Strategist.</p>
+          <a class="ipg-btn ipg-btn--gold" data-ipg-book href="#">Build my next property plan →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  #ipg-rating {
+    --ipg-navy: #0b1a2e;
+    --ipg-navy-2: #10233d;
+    --ipg-navy-3: #07111f;
+    --ipg-line: rgba(255, 255, 255, .12);
+    --ipg-text: #e9eef6;
+    --ipg-muted: #9fb0c8;
+    --ipg-blue: #2f7cf6;
+    --ipg-blue-2: #5b9bff;
+    --ipg-gold: #d4a94e;
+    --ipg-gold-2: #f0cd7d;
+    --ipg-paper: #f6f4ef;
+    --ipg-ink: #0b1a2e;
+    --ipg-ink-muted: #4a5a70;
+    --ipg-radius: 14px;
+    --ipg-ease: cubic-bezier(.22, 1, .36, 1);
+    background: var(--ipg-navy);
+    color: var(--ipg-text);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #ipg-rating,
+  #ipg-rating * {
+    box-sizing: border-box;
+  }
+
+  #ipg-rating [hidden] {
+    display: none !important;
+  }
+
+  #ipg-rating h1,
+  #ipg-rating h2,
+  #ipg-rating h3,
+  #ipg-rating h4,
+  #ipg-rating p,
+  #ipg-rating ul {
+    margin: 0;
+  }
+
+  #ipg-rating .ipg-container {
+    width: min(100%, 1120px);
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  #ipg-rating .ipg-narrow {
+    width: min(100%, 760px);
+  }
+
+  #ipg-rating .ipg-center {
+    text-align: center;
+  }
+
+  #ipg-rating .ipg-logo {
+    display: block;
+    height: 40px;
+    width: auto;
+    margin-bottom: 36px;
+  }
+
+  #ipg-rating .ipg-logo--sm {
+    height: 26px;
+    margin: 0;
+  }
+
+  #ipg-rating .ipg-eyebrow {
+    color: var(--ipg-gold);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  #ipg-rating .ipg-eyebrow--dark {
+    color: #9a7426;
+  }
+
+  #ipg-rating h1 {
+    color: #fff;
+    font-size: clamp(36px, 5.4vw, 60px);
+    font-weight: 800;
+    letter-spacing: -.035em;
+    line-height: 1.04;
+    text-transform: uppercase;
+  }
+
+  #ipg-rating h2 {
+    font-size: clamp(28px, 3.6vw, 42px);
+    font-weight: 800;
+    letter-spacing: -.03em;
+    line-height: 1.1;
+    margin-bottom: 22px;
+  }
+
+  #ipg-rating .ipg-lead {
+    color: var(--ipg-muted);
+    font-size: clamp(17px, 1.6vw, 20px);
+    margin-top: 24px;
+    max-width: 560px;
+  }
+
+  /* Buttons */
+  #ipg-rating .ipg-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 56px;
+    padding: 0 30px;
+    border: 0;
+    border-radius: 999px;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform .2s var(--ipg-ease), box-shadow .2s var(--ipg-ease), background .2s;
+  }
+
+  #ipg-rating .ipg-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  #ipg-rating .ipg-btn:focus-visible,
+  #ipg-rating .ipg-answer:focus-visible,
+  #ipg-rating .ipg-back:focus-visible,
+  #ipg-rating .ipg-app__exit:focus-visible {
+    outline: 3px solid var(--ipg-gold-2);
+    outline-offset: 3px;
+  }
+
+  #ipg-rating .ipg-btn--primary {
+    background: var(--ipg-blue);
+    color: #fff;
+    box-shadow: 0 10px 30px -10px rgba(47, 124, 246, .7);
+  }
+
+  #ipg-rating .ipg-btn--primary:hover {
+    background: var(--ipg-blue-2);
+  }
+
+  #ipg-rating .ipg-btn--gold {
+    background: var(--ipg-gold);
+    color: var(--ipg-navy-3);
+    box-shadow: 0 10px 30px -10px rgba(212, 169, 78, .7);
+  }
+
+  #ipg-rating .ipg-btn--gold:hover {
+    background: var(--ipg-gold-2);
+  }
+
+  #ipg-rating .ipg-btn--block {
+    width: 100%;
+  }
+
+  #ipg-rating .ipg-btn[disabled] {
+    opacity: .6;
+    cursor: wait;
+    transform: none;
+  }
+
+  #ipg-rating .ipg-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 22px;
+    margin-top: 36px;
+  }
+
+  #ipg-rating .ipg-trust {
+    color: var(--ipg-muted);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  #ipg-rating .ipg-trust span {
+    color: var(--ipg-gold);
+    margin: 0 4px;
+  }
+
+  #ipg-rating .ipg-center .ipg-trust,
+  #ipg-rating .ipg-discover .ipg-trust {
+    margin-top: 14px;
+  }
+
+  #ipg-rating .ipg-trust--dark {
+    color: var(--ipg-ink-muted);
+  }
+
+  /* Hero */
+  #ipg-rating .ipg-hero {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(56px, 9vw, 120px) 0;
+    background:
+      radial-gradient(900px 500px at 85% 10%, rgba(47, 124, 246, .22), transparent 60%),
+      radial-gradient(600px 400px at 0% 100%, rgba(212, 169, 78, .10), transparent 60%),
+      var(--ipg-navy);
+  }
+
+  #ipg-rating .ipg-hero__grid {
+    display: grid;
+    grid-template-columns: 1.25fr .85fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  #ipg-rating .ipg-preview-card {
+    background: linear-gradient(160deg, var(--ipg-navy-2), var(--ipg-navy-3));
+    border: 1px solid var(--ipg-line);
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .6);
+    text-align: center;
+    transform: rotate(1.5deg);
+  }
+
+  #ipg-rating .ipg-preview-card__label {
+    color: var(--ipg-muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+
+  #ipg-rating .ipg-preview-card__score,
+  #ipg-rating .ipg-results__score {
+    position: relative;
+    width: 168px;
+    margin: 18px auto 8px;
+  }
+
+  #ipg-rating .ipg-preview-card__num,
+  #ipg-rating .ipg-results__num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    padding-top: 58px;
+    gap: 2px;
+  }
+
+  #ipg-rating .ipg-preview-card__num strong,
+  #ipg-rating .ipg-results__num strong {
+    color: #fff;
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: -.04em;
+    line-height: 1;
+  }
+
+  #ipg-rating .ipg-preview-card__num span,
+  #ipg-rating .ipg-results__num span {
+    color: var(--ipg-muted);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  #ipg-rating .ipg-preview-card__level {
+    color: var(--ipg-gold);
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin-bottom: 22px;
+  }
+
+  #ipg-rating .ipg-gauge {
+    display: block;
+    width: 100%;
+    transform: rotate(-90deg);
+  }
+
+  #ipg-rating .ipg-gauge circle {
+    fill: none;
+    stroke-width: 9;
+  }
+
+  #ipg-rating .ipg-gauge__track {
+    stroke: rgba(255, 255, 255, .08);
+  }
+
+  #ipg-rating .ipg-gauge__bar {
+    stroke: var(--ipg-blue);
+    stroke-linecap: round;
+    stroke-dasharray: 326.73;
+    stroke-dashoffset: 326.73;
+    transition: stroke-dashoffset 1.4s var(--ipg-ease);
+  }
+
+  #ipg-rating .ipg-preview-bars {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+    text-align: left;
+  }
+
+  #ipg-rating .ipg-preview-bars li {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--ipg-muted);
+  }
+
+  #ipg-rating .ipg-preview-bars i {
+    position: relative;
+    height: 6px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, .08);
+  }
+
+  #ipg-rating .ipg-preview-bars i::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: var(--w);
+    border-radius: inherit;
+    background: var(--ipg-blue);
+  }
+
+  #ipg-rating .ipg-preview-bars i.is-gold::after {
+    background: var(--ipg-gold);
+  }
+
+  /* Bands */
+  #ipg-rating .ipg-band {
+    padding: clamp(64px, 9vw, 110px) 0;
+  }
+
+  #ipg-rating .ipg-band p + p {
+    margin-top: 16px;
+  }
+
+  #ipg-rating .ipg-band p {
+    color: var(--ipg-muted);
+  }
+
+  #ipg-rating .ipg-band--light {
+    background: var(--ipg-paper);
+    color: var(--ipg-ink);
+  }
+
+  #ipg-rating .ipg-band--light h2 {
+    color: var(--ipg-ink);
+  }
+
+  #ipg-rating .ipg-band--light p {
+    color: var(--ipg-ink-muted);
+  }
+
+  #ipg-rating .ipg-band--deep {
+    background: var(--ipg-navy-3);
+  }
+
+  #ipg-rating .ipg-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  #ipg-rating .ipg-discover {
+    background: #fff;
+    border-radius: 20px;
+    padding: 36px;
+    box-shadow: 0 30px 60px -40px rgba(11, 26, 46, .45);
+  }
+
+  #ipg-rating .ipg-discover__title {
+    color: var(--ipg-ink) !important;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  #ipg-rating .ipg-discover ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  #ipg-rating .ipg-discover li {
+    position: relative;
+    padding-left: 34px;
+    color: var(--ipg-ink-muted);
+  }
+
+  #ipg-rating .ipg-discover li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(47, 124, 246, .12);
+    color: var(--ipg-blue);
+    font-size: 12px;
+    font-weight: 800;
+    display: grid;
+    place-items: center;
+  }
+
+  #ipg-rating .ipg-quote {
+    margin: 40px 0 0;
+    padding-left: 28px;
+    border-left: 3px solid var(--ipg-gold);
+    color: #fff;
+    font-size: clamp(19px, 2vw, 23px);
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  #ipg-rating .ipg-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 36px 0 48px;
+  }
+
+  #ipg-rating .ipg-step {
+    background: var(--ipg-navy-2);
+    border: 1px solid var(--ipg-line);
+    border-radius: 18px;
+    padding: 30px;
+  }
+
+  #ipg-rating .ipg-step__num {
+    display: block;
+    color: var(--ipg-gold);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    margin-bottom: 18px;
+  }
+
+  #ipg-rating .ipg-step h3 {
+    color: #fff;
+    font-size: 21px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  #ipg-rating .ipg-step p {
+    font-size: 15px;
+  }
+
+  /* ============ APP ============ */
+  #ipg-rating .ipg-app {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483000;
+    display: flex;
+    flex-direction: column;
+    background:
+      radial-gradient(800px 400px at 100% 0%, rgba(47, 124, 246, .16), transparent 60%),
+      var(--ipg-navy);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #ipg-rating .ipg-app__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    width: min(100%, 860px);
+    margin: 0 auto;
+  }
+
+  #ipg-rating .ipg-app__brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--ipg-muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+
+  #ipg-rating .ipg-app__exit {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--ipg-line);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ipg-muted);
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  #ipg-rating .ipg-progress {
+    height: 3px;
+    background: rgba(255, 255, 255, .07);
+    flex-shrink: 0;
+  }
+
+  #ipg-rating .ipg-progress i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--ipg-blue), var(--ipg-blue-2));
+    transition: width .35s var(--ipg-ease);
+  }
+
+  #ipg-rating .ipg-app__body {
+    width: min(100%, 760px);
+    margin: 0 auto;
+    padding: clamp(28px, 6vh, 64px) 20px 48px;
+    flex: 1;
+  }
+
+  #ipg-rating .ipg-screen {
+    display: none;
+  }
+
+  #ipg-rating .ipg-screen.is-active {
+    display: block;
+    animation: ipg-in .45s var(--ipg-ease);
+  }
+
+  @keyframes ipg-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  #ipg-rating .ipg-q__meta {
+    color: var(--ipg-muted);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  #ipg-rating .ipg-q__cat {
+    color: var(--ipg-gold);
+    margin-left: 8px;
+  }
+
+  #ipg-rating .ipg-q__title {
+    color: #fff;
+    font-size: clamp(23px, 3.4vw, 32px);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.25;
+    margin-bottom: 28px;
+    outline: none;
+  }
+
+  #ipg-rating .ipg-q__hint {
+    color: var(--ipg-muted);
+    margin: -14px 0 24px;
+  }
+
+  #ipg-rating .ipg-answers {
+    display: grid;
+    gap: 12px;
+  }
+
+  #ipg-rating .ipg-answer {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
+    padding: 20px 22px;
+    border: 2px solid transparent;
+    border-radius: var(--ipg-radius);
+    background: var(--ipg-paper);
+    color: var(--ipg-ink);
+    font: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.45;
+    text-align: left;
+    cursor: pointer;
+    transition: transform .15s var(--ipg-ease), border-color .15s, background .15s;
+  }
+
+  #ipg-rating .ipg-answer:hover {
+    transform: translateY(-2px);
+    border-color: var(--ipg-blue-2);
+  }
+
+  #ipg-rating .ipg-answer__key {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: rgba(11, 26, 46, .08);
+    color: var(--ipg-ink);
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  #ipg-rating .ipg-answer.is-selected {
+    border-color: var(--ipg-blue);
+    background: #fff;
+  }
+
+  #ipg-rating .ipg-answer.is-selected .ipg-answer__key {
+    background: var(--ipg-blue);
+    color: #fff;
+  }
+
+  #ipg-rating .ipg-answers--multi {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #ipg-rating .ipg-answers--multi .ipg-answer {
+    padding: 16px 18px;
+    align-items: center;
+  }
+
+  #ipg-rating .ipg-answers--multi .ipg-answer__key {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    font-size: 12px;
+  }
+
+  #ipg-rating .ipg-back {
+    margin-top: 26px;
+    padding: 8px 0;
+    border: 0;
+    background: none;
+    color: var(--ipg-muted);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  #ipg-rating .ipg-back:hover {
+    color: #fff;
+  }
+
+  #ipg-rating .ipg-back[hidden] {
+    display: none;
+  }
+
+  #ipg-rating .ipg-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  #ipg-rating .ipg-actions .ipg-back {
+    margin-top: 0;
+  }
+
+  /* Lead form */
+  #ipg-rating .ipg-form {
+    display: grid;
+    gap: 16px;
+    background: var(--ipg-navy-2);
+    border: 1px solid var(--ipg-line);
+    border-radius: 18px;
+    padding: 28px;
+  }
+
+  #ipg-rating .ipg-form label {
+    display: grid;
+    gap: 8px;
+  }
+
+  #ipg-rating .ipg-form label span {
+    color: var(--ipg-text);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  #ipg-rating .ipg-form label em {
+    color: var(--ipg-muted);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  #ipg-rating .ipg-form input {
+    width: 100%;
+    min-height: 54px;
+    padding: 0 16px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background: var(--ipg-paper);
+    color: var(--ipg-ink);
+    font: inherit;
+    font-size: 16px;
+  }
+
+  #ipg-rating .ipg-form input:focus {
+    outline: none;
+    border-color: var(--ipg-blue);
+  }
+
+  #ipg-rating .ipg-form input[aria-invalid="true"] {
+    border-color: #ff7a7a;
+  }
+
+  #ipg-rating .ipg-form__error {
+    color: #ff9a9a;
+    font-size: 14px;
+    min-height: 0;
+  }
+
+  #ipg-rating .ipg-form__error:empty {
+    display: none;
+  }
+
+  #ipg-rating .ipg-form__privacy {
+    color: var(--ipg-muted);
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  #ipg-rating .ipg-form__privacy a {
+    color: var(--ipg-muted);
+  }
+
+  /* Results */
+  #ipg-rating .ipg-results__hero {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  #ipg-rating .ipg-results__score {
+    width: 200px;
+  }
+
+  #ipg-rating .ipg-results__num {
+    padding-top: 68px;
+  }
+
+  #ipg-rating .ipg-results__num strong {
+    font-size: 58px;
+  }
+
+  #ipg-rating .ipg-results__level {
+    display: inline-block;
+    margin: 10px 0 22px;
+    padding: 6px 16px;
+    border: 1px solid rgba(212, 169, 78, .45);
+    border-radius: 999px;
+    color: var(--ipg-gold-2);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  #ipg-rating .ipg-results__headline {
+    color: #fff;
+    font-size: clamp(21px, 2.6vw, 26px);
+    font-weight: 700;
+    line-height: 1.3;
+    max-width: 600px;
+    margin: 0 auto 12px;
+  }
+
+  #ipg-rating .ipg-results__body {
+    color: var(--ipg-muted);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  #ipg-rating .ipg-results__panel,
+  #ipg-rating .ipg-insight {
+    background: var(--ipg-navy-2);
+    border: 1px solid var(--ipg-line);
+    border-radius: 18px;
+    padding: 26px;
+  }
+
+  #ipg-rating .ipg-panel__title,
+  #ipg-rating .ipg-insight__label {
+    color: var(--ipg-muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  #ipg-rating .ipg-bars {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+  }
+
+  #ipg-rating .ipg-bars__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  #ipg-rating .ipg-bars__row b {
+    font-variant-numeric: tabular-nums;
+  }
+
+  #ipg-rating .ipg-bars__track {
+    height: 8px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .08);
+    overflow: hidden;
+  }
+
+  #ipg-rating .ipg-bars__fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: var(--ipg-blue);
+    transition: width 1.1s var(--ipg-ease);
+  }
+
+  #ipg-rating .ipg-bars li.is-weak .ipg-bars__fill {
+    background: var(--ipg-gold);
+  }
+
+  #ipg-rating .ipg-bars li.is-weak .ipg-bars__row b {
+    color: var(--ipg-gold-2);
+  }
+
+  #ipg-rating .ipg-results__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+
+  #ipg-rating .ipg-insight h4 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    margin: -8px 0 10px;
+  }
+
+  #ipg-rating .ipg-insight p:not(.ipg-insight__label) {
+    color: var(--ipg-muted);
+    font-size: 15px;
+  }
+
+  #ipg-rating .ipg-insight--gold {
+    border-color: rgba(212, 169, 78, .45);
+    background: linear-gradient(160deg, rgba(212, 169, 78, .10), var(--ipg-navy-2) 60%);
+  }
+
+  #ipg-rating .ipg-insight--gold .ipg-insight__label {
+    color: var(--ipg-gold);
+  }
+
+  #ipg-rating .ipg-insight--next p:not(.ipg-insight__label) {
+    color: var(--ipg-text);
+    font-size: 17px;
+  }
+
+  #ipg-rating .ipg-results__cta {
+    margin-top: 28px;
+    padding: 36px 28px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #12305a, var(--ipg-navy-2));
+    border: 1px solid rgba(91, 155, 255, .35);
+    text-align: center;
+  }
+
+  #ipg-rating .ipg-results__cta h3 {
+    color: #fff;
+    font-size: clamp(22px, 3vw, 28px);
+    font-weight: 800;
+    letter-spacing: -.02em;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  #ipg-rating .ipg-results__cta p {
+    color: var(--ipg-muted);
+    margin-bottom: 24px;
+  }
+
+  body.ipg-lock {
+    overflow: hidden;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    #ipg-rating .ipg-hero__grid,
+    #ipg-rating .ipg-split {
+      grid-template-columns: 1fr;
+      gap: 44px;
+    }
+
+    #ipg-rating .ipg-hero__preview {
+      max-width: 400px;
+    }
+
+    #ipg-rating .ipg-steps {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    #ipg-rating {
+      font-size: 16px;
+    }
+
+    #ipg-rating .ipg-btn {
+      width: 100%;
+    }
+
+    #ipg-rating .ipg-hero__preview {
+      display: none;
+    }
+
+    #ipg-rating .ipg-discover {
+      padding: 26px 20px;
+    }
+
+    #ipg-rating .ipg-answer {
+      padding: 16px;
+      font-size: 15px;
+    }
+
+    #ipg-rating .ipg-answers--multi,
+    #ipg-rating .ipg-results__cards {
+      grid-template-columns: 1fr;
+    }
+
+    #ipg-rating .ipg-app__body {
+      padding-top: 22px;
+    }
+
+    #ipg-rating .ipg-q__title {
+      margin-bottom: 20px;
+    }
+
+    #ipg-rating .ipg-actions {
+      flex-direction: column-reverse;
+      align-items: stretch;
+    }
+
+    #ipg-rating .ipg-form {
+      padding: 20px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #ipg-rating *,
+    #ipg-rating *::before,
+    #ipg-rating *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    /* ================= CONFIG — edit these ================= */
+    var CONFIG = {
+      // GHL Automation > Workflows > trigger "Inbound Webhook" > copy URL
+      WEBHOOK_URL: "",
+      // Your booking page (funnel step with the 15-Minute Portfolio Clarity Call calendar)
+      BOOKING_URL: "/portfolio-clarity-call",
+      PRIVACY_URL: "/privacy-policy",
+      // Light/white logo for the dark background. Leave empty to hide.
+      LOGO_URL: "",
+      CAMPAIGN: "Rate Your Property Portfolio"
+    };
+    /* ======================================================= */
+
+    var root = document.getElementById("ipg-rating");
+    if (!root) return;
+
+    var CATEGORIES = [
+      {
+        key: "strategy", name: "Strategy & Direction", field: "strategy_score", tag: "Challenge-Strategy",
+        strong: "You have a clear picture of what your portfolio needs to achieve and the role each property plays in getting there.",
+        weak: "Your answers suggest the end goal, and the role each property plays in reaching it, could be clearer. Without that, every purchase is judged on its own rather than on what it does for the portfolio.",
+        next: "Clarify the end goal, required passive income or wealth target, timeframe and the role of each future acquisition."
+      },
+      {
+        key: "finance", name: "Finance & Structure", field: "finance_score", tag: "Challenge-Finance",
+        strong: "Your lending, capital and ownership structure appear to be planned with future purchases in mind.",
+        weak: "Your answers suggest that the way your lending, capital and ownership structures work together deserves further attention. This becomes increasingly important as your portfolio grows.",
+        next: "Review borrowing capacity, debt sequencing, buffers and ownership structure before committing to the next purchase."
+      },
+      {
+        key: "selection", name: "Market & Property Selection", field: "property_selection_score", tag: "Challenge-Property",
+        strong: "You appear to have a structured approach to understanding where and what you should buy.",
+        weak: "Your answers suggest your market and property selection relies more on familiarity or recommendations than on a repeatable, data-led process.",
+        next: "Strengthen market-selection and street-level due diligence so the property fits both the market cycle and portfolio objective."
+      },
+      {
+        key: "growth", name: "Growth & Cash Flow", field: "growth_cashflow_score", tag: "Challenge-Cashflow",
+        strong: "You understand the real cash-flow impact of each purchase and actively look for ways to create equity.",
+        weak: "Your answers suggest cash flow and equity creation are being left more to the market than deliberately planned, which can quietly limit your next move.",
+        next: "Assess whether the next asset should improve cash flow, manufacture equity, increase growth exposure or rebalance the portfolio."
+      },
+      {
+        key: "management", name: "Portfolio Management", field: "portfolio_management_score", tag: "Challenge-Strategy",
+        strong: "You review your portfolio regularly, have a team around you and are ready to act when the right opportunity appears.",
+        weak: "Your answers suggest your portfolio is not being reviewed or coordinated as one system, which makes it harder to act quickly when the right opportunity appears.",
+        next: "Introduce a structured review process covering valuations, rent, debt, equity, servicing and the next acquisition window."
+      }
+    ];
+
+    var QUESTIONS = [
+      { cat: "strategy", label: "Portfolio Direction",
+        q: "How clear are you on what your property portfolio actually needs to achieve?",
+        a: ["I know I want to invest, but I do not have a specific target.",
+            "I have a rough idea of the income or wealth I want to build.",
+            "I have clear financial targets, timeframes and portfolio milestones."] },
+      { cat: "finance", label: "Finance Strategy",
+        q: "How well do you understand your borrowing capacity and how your next purchase could affect the one after it?",
+        a: ["I normally find out when I speak to the bank or broker.",
+            "I understand roughly what I can borrow today.",
+            "My lending is planned around both my next purchase and future borrowing capacity."] },
+      { cat: "finance", label: "Ownership Structure",
+        q: "How confident are you that your property ownership structure is appropriate for your long-term strategy?",
+        a: ["I have not really considered it.",
+            "I have discussed it with an accountant or adviser.",
+            "My structure has been considered around tax, protection, lending and future acquisitions."] },
+      { cat: "finance", label: "Capital Allocation",
+        q: "How deliberately are you managing your deposits, equity and cash reserves?",
+        a: ["I normally invest when I have accumulated enough money.",
+            "I keep some money aside as a buffer.",
+            "I deliberately allocate capital between deposits, costs, buffers and future purchases."] },
+      { cat: "selection", label: "Market Selection",
+        q: "How do you decide which Australian property market to invest in?",
+        a: ["Areas I know, recommendations or markets I have heard are performing well.",
+            "I research several indicators before choosing an area.",
+            "I compare markets using economic, supply, demand, affordability, rental and demographic data."] },
+      { cat: "selection", label: "Property Selection",
+        q: "Do you have a repeatable checklist for identifying an investment-grade property?",
+        a: ["Not really.",
+            "I understand some of the characteristics I look for.",
+            "I use a structured property and street-level due-diligence process before purchasing."] },
+      { cat: "growth", label: "Cash Flow",
+        q: "How well do you understand the real cash-flow impact of each property you purchase?",
+        a: ["I mainly look at the advertised rental yield.",
+            "I estimate repayments and holding costs.",
+            "I model rent, expenses, rates, vacancy, buffers and the impact on my wider portfolio."] },
+      { cat: "growth", label: "Manufacturing Equity",
+        q: "Are you actively looking for ways to create equity instead of relying only on the market to grow?",
+        a: ["No. I mainly rely on market growth.",
+            "I have considered renovation or minor improvements.",
+            "I deliberately assess value-add opportunities where they suit the strategy."] },
+      { cat: "strategy", label: "Portfolio Mix",
+        q: "Does every property in your portfolio have a specific job?",
+        a: ["Not really. I mainly focus on buying good property.",
+            "I try to balance growth and cash flow.",
+            "Each acquisition has a clear role within my overall portfolio strategy."] },
+      { cat: "management", label: "Portfolio Reviews",
+        q: "How regularly do you review the performance of your portfolio?",
+        a: ["Rarely.",
+            "Usually when I am thinking about buying or refinancing.",
+            "I regularly review values, rents, debt, equity, cash flow and future opportunities."] },
+      { cat: "management", label: "Professional Team",
+        q: "Do you have a trusted professional team helping execute your property strategy?",
+        a: ["Not really.",
+            "I work with a few different professionals.",
+            "I have a coordinated team supporting finance, property, tax, legal and portfolio decisions."] },
+      { cat: "management", label: "Execution",
+        q: "If the right investment opportunity appeared tomorrow, how ready would you be to act?",
+        a: ["I would need to work out my finance and strategy first.",
+            "I could probably act after getting a few things organised.",
+            "My finance, strategy, criteria and professional team are already prepared."] }
+    ];
+
+    var CHALLENGES = [
+      "Finding the right property",
+      "Borrowing capacity",
+      "Knowing where to invest",
+      "Cash flow",
+      "Tax or ownership structure",
+      "Knowing which strategy to follow",
+      "Not enough time",
+      "I am not sure what my next move should be"
+    ];
+
+    // Maps each challenge option to the tag from the blueprint
+    var CHALLENGE_TAGS = {
+      "Finding the right property": "Challenge-Property",
+      "Borrowing capacity": "Challenge-Finance",
+      "Knowing where to invest": "Challenge-Property",
+      "Cash flow": "Challenge-Cashflow",
+      "Tax or ownership structure": "Challenge-Finance",
+      "Knowing which strategy to follow": "Challenge-Strategy",
+      "Not enough time": "Challenge-Strategy",
+      "I am not sure what my next move should be": "Challenge-Strategy"
+    };
+
+    var LEVELS = [
+      { min: 0, name: "Foundation Investor", tag: "Score-Foundation",
+        headline: "Your biggest opportunity right now is clarity.",
+        body: "Before focusing on finding properties, establish where you are trying to get financially, what your borrowing position looks like and what type of properties your portfolio needs. The right first move can make every future decision easier." },
+      { min: 35, name: "Emerging Portfolio Builder", tag: "Score-Emerging",
+        headline: "You already understand some of the fundamentals, but your strategy still has gaps.",
+        body: "These gaps may not create problems on your first property, but they can become increasingly important as borrowing capacity, equity and cash flow become more constrained." },
+      { min: 55, name: "Strategic Investor", tag: "Score-Strategic",
+        headline: "You have built a solid foundation.",
+        body: "Your opportunity is now less about simply buying another property and more about improving the sequencing of your acquisitions, use of equity and portfolio mix." },
+      { min: 70, name: "Advanced Portfolio Builder", tag: "Score-Advanced",
+        headline: "Your portfolio strategy is well developed.",
+        body: "At this stage, small improvements in capital allocation, debt structure, manufactured equity and asset selection can have an increasingly significant impact." },
+      { min: 85, name: "Portfolio Architect", tag: "Score-Architect",
+        headline: "You are approaching property as a portfolio rather than a collection of individual assets.",
+        body: "Your focus now should be continual optimisation, capital efficiency, risk management and making sure every future acquisition continues moving you toward the end goal." }
+    ];
+
+    var GAUGE_LENGTH = 326.73; // 2 * PI * r(52)
+
+    var state = {
+      step: 0,              // 0-11 questions, 12 challenge, 13 lead, 14 results
+      answers: [],
+      challenges: [],
+      contact: {},
+      started: false,
+      milestones: {}
+    };
+
+    function $(sel) { return root.querySelector(sel); }
+    function $all(sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); }
+
+    var app = $("[data-ipg-app]");
+    var progress = $("[data-ipg-progress]");
+    var screens = {};
+    $all("[data-ipg-screen]").forEach(function (el) {
+      screens[el.getAttribute("data-ipg-screen")] = el;
+    });
+
+    // ---------- Config-driven bits ----------
+    if (CONFIG.LOGO_URL) {
+      $all("[data-ipg-logo]").forEach(function (img) {
+        img.src = CONFIG.LOGO_URL;
+        img.hidden = false;
+      });
+    }
+    $("[data-ipg-privacy]").href = CONFIG.PRIVACY_URL || "#";
+
+    // ---------- Tracking ----------
+    var params = new URLSearchParams(window.location.search);
+    var UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"];
+
+    function track(name, data) {
+      try {
+        if (typeof window.fbq === "function") {
+          var standard = { Lead: 1, CompleteRegistration: 1 };
+          window.fbq(standard[name] ? "track" : "trackCustom", name, data || {});
+        }
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push(Object.assign({ event: "ipg_" + name }, data || {}));
+      } catch (e) { /* tracking must never break the funnel */ }
+    }
+
+    // ---------- Scoring ----------
+    function score(answers) {
+      var raw = 0;
+      var cats = {};
+      CATEGORIES.forEach(function (c) { cats[c.key] = { pts: 0, max: 0 }; });
+
+      QUESTIONS.forEach(function (q, i) {
+        var pts = answers[i] || 0;
+        raw += pts;
+        cats[q.cat].pts += pts;
+        cats[q.cat].max += 2;
+      });
+
+      var rating = Math.round(raw / (QUESTIONS.length * 2) * 100);
+      var level = LEVELS[0];
+      LEVELS.forEach(function (l) { if (rating >= l.min) level = l; });
+
+      var catList = CATEGORIES.map(function (c) {
+        return Object.assign({}, c, { pct: Math.round(cats[c.key].pts / cats[c.key].max * 100) });
+      });
+
+      // Strongest = highest score (first on ties); weakest = lowest of the rest (last on ties)
+      var strongest = catList[0];
+      catList.forEach(function (c) { if (c.pct > strongest.pct) strongest = c; });
+      var weakest = null;
+      catList.forEach(function (c) {
+        if (c === strongest) return;
+        if (!weakest || c.pct <= weakest.pct) weakest = c;
+      });
+
+      return { raw: raw, rating: rating, level: level, categories: catList, strongest: strongest, weakest: weakest };
+    }
+
+    // ---------- Rendering ----------
+    function el(tag, cls, text) {
+      var node = document.createElement(tag);
+      if (cls) node.className = cls;
+      if (text != null) node.textContent = text;
+      return node;
+    }
+
+    function setProgress(pct) {
+      progress.style.width = pct + "%";
+    }
+
+    function show(name) {
+      Object.keys(screens).forEach(function (k) {
+        screens[k].classList.toggle("is-active", k === name);
+      });
+      app.scrollTop = 0;
+      var title = screens[name].querySelector(".ipg-q__title");
+      if (title) {
+        try { title.focus({ preventScroll: true }); } catch (e) { title.focus(); }
+      }
+    }
+
+    function renderQuestion() {
+      var i = state.step;
+      var q = QUESTIONS[i];
+      $("[data-ipg-q-count]").textContent = "Question " + (i + 1) + " of " + QUESTIONS.length;
+      $("[data-ipg-q-cat]").textContent = q.label;
+      $("[data-ipg-q-title]").textContent = q.q;
+
+      var wrap = $("[data-ipg-answers]");
+      wrap.innerHTML = "";
+      q.a.forEach(function (text, idx) {
+        var btn = el("button", "ipg-answer");
+        btn.type = "button";
+        btn.setAttribute("aria-pressed", state.answers[i] === idx ? "true" : "false");
+        if (state.answers[i] === idx) btn.classList.add("is-selected");
+        btn.appendChild(el("span", "ipg-answer__key", "ABC".charAt(idx)));
+        btn.appendChild(el("span", null, text));
+        btn.addEventListener("click", function () { answer(idx, btn); });
+        wrap.appendChild(btn);
+      });
+
+      screens.question.querySelector("[data-ipg-back]").hidden = i === 0;
+      setProgress(i / QUESTIONS.length * 100);
+      show("question");
+    }
+
+    var advancing = false;
+    function answer(idx, btn) {
+      if (advancing) return;
+      advancing = true;
+      state.answers[state.step] = idx;
+      $all(".ipg-answer").forEach(function (b) {
+        b.classList.remove("is-selected");
+        b.setAttribute("aria-pressed", "false");
+      });
+      btn.classList.add("is-selected");
+      btn.setAttribute("aria-pressed", "true");
+      setProgress((state.step + 1) / QUESTIONS.length * 100);
+
+      var done = state.step + 1;
+      [[3, "Assessment25"], [6, "Assessment50"], [9, "Assessment75"]].forEach(function (m) {
+        if (done === m[0] && !state.milestones[m[1]]) {
+          state.milestones[m[1]] = true;
+          track(m[1]);
+        }
+      });
+
+      setTimeout(function () {
+        advancing = false;
+        go(state.step + 1);
+      }, 260);
+    }
+
+    function renderChallenges() {
+      var wrap = $("[data-ipg-challenges]");
+      wrap.innerHTML = "";
+      CHALLENGES.forEach(function (text) {
+        var btn = el("button", "ipg-answer");
+        btn.type = "button";
+        var on = state.challenges.indexOf(text) !== -1;
+        btn.classList.toggle("is-selected", on);
+        btn.setAttribute("aria-pressed", on ? "true" : "false");
+        btn.appendChild(el("span", "ipg-answer__key", on ? "✓" : ""));
+        btn.appendChild(el("span", null, text));
+        btn.addEventListener("click", function () {
+          var pos = state.challenges.indexOf(text);
+          if (pos === -1) state.challenges.push(text); else state.challenges.splice(pos, 1);
+          renderChallenges();
+        });
+        wrap.appendChild(btn);
+      });
+    }
+
+    function go(step) {
+      state.step = step;
+      if (step < QUESTIONS.length) {
+        renderQuestion();
+      } else if (step === QUESTIONS.length) {
+        setProgress(100);
+        renderChallenges();
+        show("challenge");
+      } else if (step === QUESTIONS.length + 1) {
+        setProgress(100);
+        show("lead");
+        track("AssessmentCompleted");
+      } else {
+        setProgress(100);
+        renderResults();
+        show("results");
+      }
+    }
+
+    function renderResults() {
+      var r = score(state.answers);
+      var name = state.contact.first_name;
+
+      $("[data-ipg-r-greeting]").textContent = name
+        ? name + ", your Property Portfolio Rating"
+        : "Your Property Portfolio Rating";
+      $("[data-ipg-r-level]").textContent = r.level.name;
+      $("[data-ipg-r-headline]").textContent = r.level.headline;
+      $("[data-ipg-r-body]").textContent = r.level.body;
+      $("[data-ipg-r-strong]").textContent = r.strongest.name;
+      $("[data-ipg-r-strong-copy]").textContent = r.strongest.strong;
+      $("[data-ipg-r-weak]").textContent = r.weakest.name;
+      $("[data-ipg-r-weak-copy]").textContent = r.weakest.weak;
+      $("[data-ipg-r-next]").textContent =
+        "Before buying another property, make sure the next acquisition works with the property after it, " +
+        "rather than simply assessing whether you can afford the next purchase today. " + r.weakest.next;
+
+      var bars = $("[data-ipg-r-bars]");
+      bars.innerHTML = "";
+      r.categories.forEach(function (c) {
+        var li = el("li", c === r.weakest ? "is-weak" : null);
+        var row = el("div", "ipg-bars__row");
+        row.appendChild(el("span", null, c.name));
+        row.appendChild(el("b", null, c.pct + "/100"));
+        var track_ = el("div", "ipg-bars__track");
+        var fill = el("span", "ipg-bars__fill");
+        fill.setAttribute("data-w", c.pct);
+        track_.appendChild(fill);
+        li.appendChild(row);
+        li.appendChild(track_);
+        bars.appendChild(li);
+      });
+
+      $("[data-ipg-book]").href = bookingUrl(r);
+
+      // Animate gauge, number and bars
+      var gauge = $("[data-ipg-r-gauge]");
+      var num = $("[data-ipg-r-score]");
+      gauge.style.stroke = r.rating < 55 ? "var(--ipg-gold)" : "var(--ipg-blue)";
+      gauge.style.strokeDashoffset = GAUGE_LENGTH;
+      num.textContent = "0";
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          gauge.style.strokeDashoffset = GAUGE_LENGTH * (1 - r.rating / 100);
+          $all(".ipg-bars__fill").forEach(function (f) { f.style.width = f.getAttribute("data-w") + "%"; });
+        });
+      });
+      var start = null;
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) {
+        num.textContent = r.rating;
+      } else {
+        requestAnimationFrame(function tick(t) {
+          if (!start) start = t;
+          var p = Math.min((t - start) / 1200, 1);
+          num.textContent = Math.round(r.rating * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(tick);
+        });
+      }
+
+      track("ResultsViewed", { rating: r.rating, level: r.level.name });
+    }
+
+    // ---------- URLs & payload ----------
+    function pageUrl() {
+      return window.location.origin + window.location.pathname;
+    }
+
+    function resultsUrl() {
+      var p = new URLSearchParams();
+      p.set("ipg_answers", state.answers.join(""));
+      if (state.contact.first_name) p.set("first_name", state.contact.first_name);
+      return pageUrl() + "?" + p.toString();
+    }
+
+    function bookingUrl(r) {
+      var base = CONFIG.BOOKING_URL || "#";
+      var p = new URLSearchParams();
+      // GHL calendars/forms pre-fill from these standard query keys
+      if (state.contact.first_name) p.set("first_name", state.contact.first_name);
+      if (state.contact.email) p.set("email", state.contact.email);
+      if (state.contact.phone) p.set("phone", state.contact.phone);
+      p.set("portfolio_rating", r.rating);
+      p.set("investor_level", r.level.name);
+      UTM_KEYS.forEach(function (k) { if (params.get(k)) p.set(k, params.get(k)); });
+      return base + (base.indexOf("?") === -1 ? "?" : "&") + p.toString();
+    }
+
+    function buildPayload() {
+      var r = score(state.answers);
+      var tags = ["Rating-Started", "Rating-Completed", r.level.tag];
+      state.challenges.forEach(function (c) {
+        var t = CHALLENGE_TAGS[c];
+        if (t && tags.indexOf(t) === -1) tags.push(t);
+      });
+
+      var data = {
+        first_name: state.contact.first_name,
+        email: state.contact.email,
+        phone: state.contact.phone || "",
+        portfolio_rating: r.rating,
+        raw_points: r.raw,
+        investor_level: r.level.name,
+        biggest_strength: r.strongest.name,
+        biggest_weakness: r.weakest.name,
+        biggest_challenge: state.challenges.join(", "),
+        answers: state.answers.join(""),
+        results_url: resultsUrl(),
+        scorecard_source: params.get("utm_source") || document.referrer || "direct",
+        campaign: CONFIG.CAMPAIGN,
+        page_url: window.location.href,
+        tags: tags.join(",")
+      };
+      r.categories.forEach(function (c) { data[c.field] = c.pct; });
+      QUESTIONS.forEach(function (q, i) { data["q" + (i + 1)] = state.answers[i]; });
+      UTM_KEYS.forEach(function (k) { data[k] = params.get(k) || ""; });
+      return data;
+    }
+
+    function send(data) {
+      if (!CONFIG.WEBHOOK_URL) {
+        if (window.console) console.warn("[IPG rating] CONFIG.WEBHOOK_URL is empty — lead not sent.", data);
+        return;
+      }
+      var body = new URLSearchParams();
+      Object.keys(data).forEach(function (k) { body.set(k, data[k] == null ? "" : data[k]); });
+      try {
+        // Form-encoded + no-cors = "simple" request: no CORS preflight, works from any GHL domain
+        fetch(CONFIG.WEBHOOK_URL, { method: "POST", mode: "no-cors", body: body, keepalive: true });
+      } catch (e) {
+        if (navigator.sendBeacon) navigator.sendBeacon(CONFIG.WEBHOOK_URL, body);
+      }
+    }
+
+    // ---------- Lead form ----------
+    var form = $("[data-ipg-form]");
+    var errorBox = $("[data-ipg-form-error]");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var first = form.first_name.value.trim();
+      var email = form.email.value.trim();
+      var phone = form.phone.value.trim();
+      var bad = null;
+
+      [form.first_name, form.email, form.phone].forEach(function (i) { i.removeAttribute("aria-invalid"); });
+      if (!first) bad = [form.first_name, "Please enter your first name."];
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) bad = [form.email, "Please enter a valid email address."];
+      else if (phone && phone.replace(/[^\d]/g, "").length < 8) bad = [form.phone, "Please check your mobile number, or leave it blank."];
+
+      if (bad) {
+        bad[0].setAttribute("aria-invalid", "true");
+        bad[0].focus();
+        errorBox.textContent = bad[1];
+        return;
+      }
+      errorBox.textContent = "";
+
+      state.contact = { first_name: first, email: email, phone: phone };
+      send(buildPayload());
+      track("Lead", { content_name: CONFIG.CAMPAIGN });
+      go(QUESTIONS.length + 2);
+    });
+
+    // ---------- Navigation ----------
+    function open() {
+      app.hidden = false;
+      document.body.classList.add("ipg-lock");
+      if (!state.started) {
+        state.started = true;
+        track("AssessmentStarted");
+      }
+      go(Math.min(state.step, QUESTIONS.length + 2));
+    }
+
+    function close() {
+      app.hidden = true;
+      document.body.classList.remove("ipg-lock");
+    }
+
+    $all("[data-ipg-start]").forEach(function (b) { b.addEventListener("click", open); });
+    $("[data-ipg-exit]").addEventListener("click", close);
+    $("[data-ipg-challenge-next]").addEventListener("click", function () { go(QUESTIONS.length + 1); });
+    $all("[data-ipg-back]").forEach(function (b) {
+      b.addEventListener("click", function () { if (state.step > 0) go(state.step - 1); });
+    });
+    $("[data-ipg-book]").addEventListener("click", function () { track("BookingClicked"); });
+
+    document.addEventListener("keydown", function (e) {
+      if (app.hidden) return;
+      if (e.key === "Escape") close();
+      if (state.step < QUESTIONS.length && /^[1-3abcABC]$/.test(e.key)) {
+        var idx = /[1-3]/.test(e.key) ? +e.key - 1 : "abc".indexOf(e.key.toLowerCase());
+        var btns = $all("[data-ipg-answers] .ipg-answer");
+        if (btns[idx]) answer(idx, btns[idx]);
+      }
+    });
+
+    // ---------- Deep link: ?ipg_answers=012012012012 opens results ----------
+    var preset = params.get("ipg_answers");
+    if (preset && /^[0-2]{12}$/.test(preset)) {
+      state.answers = preset.split("").map(Number);
+      state.contact.first_name = params.get("first_name") || "";
+      state.started = true;
+      state.step = QUESTIONS.length + 2;
+      open();
+    } else {
+      track("LandingPageView");
+    }
+  })();
+</script>
