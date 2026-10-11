@@ -14,7 +14,7 @@
     WEBHOOK_URL  -> URL of the GHL Workflow "Inbound Webhook" trigger
     BOOKING_URL  -> your 15-Minute Portfolio Clarity Call booking page
     PRIVACY_URL  -> your privacy policy page
-    LOGO_URL     -> IPG logo (light/white version for the dark background)
+    LOGO_URL     -> IPG logo (full-colour version)
 
   See GHL-SETUP-rate-your-portfolio.md for the custom fields, tags and
   workflow mapping that the webhook payload fills.
@@ -25,7 +25,7 @@
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <section id="ipg-rating">
 
@@ -63,9 +63,9 @@
             <p class="ipg-preview-card__level">Strategic Investor</p>
             <ul class="ipg-preview-bars">
               <li><span>Strategy</span><i style="--w:75%"></i></li>
-              <li><span>Finance</span><i class="is-gold" style="--w:50%"></i></li>
+              <li><span>Finance</span><i class="is-weak" style="--w:50%"></i></li>
               <li><span>Selection</span><i style="--w:75%"></i></li>
-              <li><span>Cash flow</span><i class="is-gold" style="--w:50%"></i></li>
+              <li><span>Cash flow</span><i class="is-weak" style="--w:50%"></i></li>
               <li><span>Management</span><i style="--w:83%"></i></li>
             </ul>
           </div>
@@ -76,7 +76,7 @@
     <section class="ipg-band ipg-band--light">
       <div class="ipg-container ipg-split">
         <div>
-          <p class="ipg-eyebrow ipg-eyebrow--dark">Owning property vs building a portfolio</p>
+          <p class="ipg-eyebrow">Owning property vs building a portfolio</p>
           <h2>Are you really building a property portfolio?</h2>
           <p>
             Buying an investment property is one thing. Building a portfolio that
@@ -98,7 +98,7 @@
             <li>Your biggest opportunity to improve your portfolio.</li>
           </ul>
           <button type="button" class="ipg-btn ipg-btn--primary" data-ipg-start>Rate my portfolio</button>
-          <p class="ipg-trust ipg-trust--dark">Free <span>•</span> 12 Questions <span>•</span> Instant Result</p>
+          <p class="ipg-trust">Free <span>•</span> 12 Questions <span>•</span> Instant Result</p>
         </div>
       </div>
     </section>
@@ -247,7 +247,7 @@
             <h4 data-ipg-r-strong></h4>
             <p data-ipg-r-strong-copy></p>
           </article>
-          <article class="ipg-insight ipg-insight--gold">
+          <article class="ipg-insight ipg-insight--opportunity">
             <p class="ipg-insight__label">Your biggest opportunity</p>
             <h4 data-ipg-r-weak></h4>
             <p data-ipg-r-weak-copy></p>
@@ -262,7 +262,7 @@
         <div class="ipg-results__cta">
           <h3>Turn your rating into your next property move</h3>
           <p>Book a complimentary 15-minute Portfolio Clarity Call with an IPG Property Strategist.</p>
-          <a class="ipg-btn ipg-btn--gold" data-ipg-book href="#">Build my next property plan →</a>
+          <a class="ipg-btn ipg-btn--primary" data-ipg-book href="#">Build my next property plan →</a>
         </div>
       </div>
 
@@ -272,26 +272,29 @@
 
 <style>
   #ipg-rating {
-    --ipg-navy: #0b1a2e;
-    --ipg-navy-2: #10233d;
-    --ipg-navy-3: #07111f;
-    --ipg-line: rgba(255, 255, 255, .12);
-    --ipg-text: #e9eef6;
-    --ipg-muted: #9fb0c8;
-    --ipg-blue: #2f7cf6;
-    --ipg-blue-2: #5b9bff;
-    --ipg-gold: #d4a94e;
-    --ipg-gold-2: #f0cd7d;
-    --ipg-paper: #f6f4ef;
-    --ipg-ink: #0b1a2e;
-    --ipg-ink-muted: #4a5a70;
+    /* Investor Partner Group brand colours (investorpartner.au) */
+    --ipg-teal: #114253;
+    --ipg-teal-2: #1a5568;
+    --ipg-teal-3: #0b3140;
+    --ipg-orange: #ee4f31;
+    --ipg-orange-2: #d9401f;
+    --ipg-red: #e80e48;
+    --ipg-aqua: #ecfbff;
+    --ipg-aqua-2: #d6f3fb;
+    --ipg-white: #ffffff;
+    --ipg-card: #f4f6f8;
+    --ipg-line: #dbe7ec;
+    --ipg-text: #114253;
+    --ipg-muted: #51656e;
+    --ipg-on-teal: #ffffff;
+    --ipg-on-teal-muted: #c3d9e0;
     --ipg-radius: 14px;
     --ipg-ease: cubic-bezier(.22, 1, .36, 1);
-    background: var(--ipg-navy);
+    background: var(--ipg-white);
     color: var(--ipg-text);
-    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    font-size: 17px;
-    line-height: 1.6;
+    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -320,7 +323,7 @@
   }
 
   #ipg-rating .ipg-narrow {
-    width: min(100%, 760px);
+    width: min(100%, 780px);
   }
 
   #ipg-rating .ipg-center {
@@ -329,69 +332,67 @@
 
   #ipg-rating .ipg-logo {
     display: block;
-    height: 40px;
+    height: 44px;
     width: auto;
-    margin-bottom: 36px;
+    margin-bottom: 32px;
   }
 
   #ipg-rating .ipg-logo--sm {
-    height: 26px;
+    height: 30px;
     margin: 0;
   }
 
   #ipg-rating .ipg-eyebrow {
-    color: var(--ipg-gold);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .16em;
+    color: var(--ipg-red);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .12em;
     text-transform: uppercase;
-    margin-bottom: 18px;
-  }
-
-  #ipg-rating .ipg-eyebrow--dark {
-    color: #9a7426;
+    margin-bottom: 14px;
   }
 
   #ipg-rating h1 {
-    color: #fff;
-    font-size: clamp(36px, 5.4vw, 60px);
-    font-weight: 800;
-    letter-spacing: -.035em;
-    line-height: 1.04;
-    text-transform: uppercase;
+    color: var(--ipg-teal);
+    font-size: clamp(34px, 5vw, 54px);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.12;
   }
 
   #ipg-rating h2 {
-    font-size: clamp(28px, 3.6vw, 42px);
-    font-weight: 800;
-    letter-spacing: -.03em;
-    line-height: 1.1;
-    margin-bottom: 22px;
+    color: var(--ipg-teal);
+    font-size: clamp(27px, 3.4vw, 38px);
+    font-weight: 700;
+    letter-spacing: -.015em;
+    line-height: 1.2;
+    margin-bottom: 20px;
   }
 
   #ipg-rating .ipg-lead {
     color: var(--ipg-muted);
-    font-size: clamp(17px, 1.6vw, 20px);
-    margin-top: 24px;
+    font-size: clamp(16px, 1.5vw, 19px);
+    margin-top: 22px;
     max-width: 560px;
   }
 
-  /* Buttons */
+  /* Buttons — orange pill, like "Book a Call" on investorpartner.au */
   #ipg-rating .ipg-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    min-height: 56px;
-    padding: 0 30px;
+    min-height: 54px;
+    padding: 12px 32px;
     border: 0;
     border-radius: 999px;
     font: inherit;
     font-size: 15px;
-    font-weight: 700;
-    letter-spacing: .08em;
+    font-weight: 600;
+    letter-spacing: .04em;
+    line-height: 1.3;
     text-transform: uppercase;
     text-decoration: none;
+    text-align: center;
     cursor: pointer;
     transition: transform .2s var(--ipg-ease), box-shadow .2s var(--ipg-ease), background .2s;
   }
@@ -404,28 +405,18 @@
   #ipg-rating .ipg-answer:focus-visible,
   #ipg-rating .ipg-back:focus-visible,
   #ipg-rating .ipg-app__exit:focus-visible {
-    outline: 3px solid var(--ipg-gold-2);
+    outline: 3px solid var(--ipg-teal);
     outline-offset: 3px;
   }
 
   #ipg-rating .ipg-btn--primary {
-    background: var(--ipg-blue);
+    background: var(--ipg-orange);
     color: #fff;
-    box-shadow: 0 10px 30px -10px rgba(47, 124, 246, .7);
+    box-shadow: 0 12px 26px -12px rgba(238, 79, 49, .75);
   }
 
   #ipg-rating .ipg-btn--primary:hover {
-    background: var(--ipg-blue-2);
-  }
-
-  #ipg-rating .ipg-btn--gold {
-    background: var(--ipg-gold);
-    color: var(--ipg-navy-3);
-    box-shadow: 0 10px 30px -10px rgba(212, 169, 78, .7);
-  }
-
-  #ipg-rating .ipg-btn--gold:hover {
-    background: var(--ipg-gold-2);
+    background: var(--ipg-orange-2);
   }
 
   #ipg-rating .ipg-btn--block {
@@ -443,7 +434,7 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 14px 22px;
-    margin-top: 36px;
+    margin-top: 34px;
   }
 
   #ipg-rating .ipg-trust {
@@ -453,7 +444,7 @@
   }
 
   #ipg-rating .ipg-trust span {
-    color: var(--ipg-gold);
+    color: var(--ipg-red);
     margin: 0 4px;
   }
 
@@ -462,19 +453,14 @@
     margin-top: 14px;
   }
 
-  #ipg-rating .ipg-trust--dark {
-    color: var(--ipg-ink-muted);
-  }
-
   /* Hero */
   #ipg-rating .ipg-hero {
     position: relative;
     overflow: hidden;
-    padding: clamp(56px, 9vw, 120px) 0;
+    padding: clamp(56px, 8vw, 110px) 0;
     background:
-      radial-gradient(900px 500px at 85% 10%, rgba(47, 124, 246, .22), transparent 60%),
-      radial-gradient(600px 400px at 0% 100%, rgba(212, 169, 78, .10), transparent 60%),
-      var(--ipg-navy);
+      radial-gradient(700px 420px at 90% 0%, rgba(232, 14, 72, .06), transparent 60%),
+      linear-gradient(180deg, var(--ipg-aqua) 0%, #fff 100%);
   }
 
   #ipg-rating .ipg-hero__grid {
@@ -485,11 +471,11 @@
   }
 
   #ipg-rating .ipg-preview-card {
-    background: linear-gradient(160deg, var(--ipg-navy-2), var(--ipg-navy-3));
+    background: #fff;
     border: 1px solid var(--ipg-line);
     border-radius: 22px;
     padding: 30px;
-    box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .6);
+    box-shadow: 0 40px 70px -35px rgba(17, 66, 83, .45);
     text-align: center;
     transform: rotate(1.5deg);
   }
@@ -497,8 +483,8 @@
   #ipg-rating .ipg-preview-card__label {
     color: var(--ipg-muted);
     font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .16em;
+    font-weight: 600;
+    letter-spacing: .14em;
     text-transform: uppercase;
   }
 
@@ -516,29 +502,29 @@
     display: flex;
     align-items: baseline;
     justify-content: center;
-    padding-top: 58px;
+    padding-top: 56px;
     gap: 2px;
   }
 
   #ipg-rating .ipg-preview-card__num strong,
   #ipg-rating .ipg-results__num strong {
-    color: #fff;
-    font-size: 48px;
-    font-weight: 800;
-    letter-spacing: -.04em;
+    color: var(--ipg-teal);
+    font-size: 46px;
+    font-weight: 700;
+    letter-spacing: -.03em;
     line-height: 1;
   }
 
   #ipg-rating .ipg-preview-card__num span,
   #ipg-rating .ipg-results__num span {
     color: var(--ipg-muted);
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 500;
   }
 
   #ipg-rating .ipg-preview-card__level {
-    color: var(--ipg-gold);
-    font-weight: 700;
+    color: var(--ipg-red);
+    font-weight: 600;
     letter-spacing: .1em;
     text-transform: uppercase;
     font-size: 13px;
@@ -557,11 +543,11 @@
   }
 
   #ipg-rating .ipg-gauge__track {
-    stroke: rgba(255, 255, 255, .08);
+    stroke: var(--ipg-aqua-2);
   }
 
   #ipg-rating .ipg-gauge__bar {
-    stroke: var(--ipg-blue);
+    stroke: var(--ipg-orange);
     stroke-linecap: round;
     stroke-dasharray: 326.73;
     stroke-dashoffset: 326.73;
@@ -589,7 +575,7 @@
     position: relative;
     height: 6px;
     border-radius: 6px;
-    background: rgba(255, 255, 255, .08);
+    background: var(--ipg-aqua-2);
   }
 
   #ipg-rating .ipg-preview-bars i::after {
@@ -598,41 +584,53 @@
     inset: 0 auto 0 0;
     width: var(--w);
     border-radius: inherit;
-    background: var(--ipg-blue);
+    background: var(--ipg-teal);
   }
 
-  #ipg-rating .ipg-preview-bars i.is-gold::after {
-    background: var(--ipg-gold);
+  #ipg-rating .ipg-preview-bars i.is-weak::after {
+    background: var(--ipg-red);
   }
 
   /* Bands */
   #ipg-rating .ipg-band {
-    padding: clamp(64px, 9vw, 110px) 0;
-  }
-
-  #ipg-rating .ipg-band p + p {
-    margin-top: 16px;
+    padding: clamp(64px, 8vw, 100px) 0;
+    background: var(--ipg-aqua);
   }
 
   #ipg-rating .ipg-band p {
     color: var(--ipg-muted);
   }
 
+  #ipg-rating .ipg-band .ipg-eyebrow {
+    color: var(--ipg-red);
+  }
+
+  #ipg-rating .ipg-band p + p {
+    margin-top: 16px;
+  }
+
   #ipg-rating .ipg-band--light {
-    background: var(--ipg-paper);
-    color: var(--ipg-ink);
-  }
-
-  #ipg-rating .ipg-band--light h2 {
-    color: var(--ipg-ink);
-  }
-
-  #ipg-rating .ipg-band--light p {
-    color: var(--ipg-ink-muted);
+    background: #fff;
   }
 
   #ipg-rating .ipg-band--deep {
-    background: var(--ipg-navy-3);
+    background: var(--ipg-teal);
+  }
+
+  #ipg-rating .ipg-band--deep h2 {
+    color: #fff;
+  }
+
+  #ipg-rating .ipg-band--deep .ipg-eyebrow {
+    color: #ff8fa8;
+  }
+
+  #ipg-rating .ipg-band--deep .ipg-trust {
+    color: var(--ipg-on-teal-muted);
+  }
+
+  #ipg-rating .ipg-band--deep .ipg-trust span {
+    color: #ff8fa8;
   }
 
   #ipg-rating .ipg-split {
@@ -643,15 +641,15 @@
   }
 
   #ipg-rating .ipg-discover {
-    background: #fff;
+    background: var(--ipg-aqua);
+    border: 1px solid var(--ipg-line);
     border-radius: 20px;
     padding: 36px;
-    box-shadow: 0 30px 60px -40px rgba(11, 26, 46, .45);
   }
 
   #ipg-rating .ipg-discover__title {
-    color: var(--ipg-ink) !important;
-    font-weight: 700;
+    color: var(--ipg-teal) !important;
+    font-weight: 600;
     margin-bottom: 18px;
   }
 
@@ -666,7 +664,7 @@
   #ipg-rating .ipg-discover li {
     position: relative;
     padding-left: 34px;
-    color: var(--ipg-ink-muted);
+    color: var(--ipg-muted);
   }
 
   #ipg-rating .ipg-discover li::before {
@@ -677,22 +675,24 @@
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: rgba(47, 124, 246, .12);
-    color: var(--ipg-blue);
+    background: rgba(232, 14, 72, .1);
+    color: var(--ipg-red);
     font-size: 12px;
-    font-weight: 800;
+    font-weight: 700;
     display: grid;
     place-items: center;
   }
 
   #ipg-rating .ipg-quote {
     margin: 40px 0 0;
-    padding-left: 28px;
-    border-left: 3px solid var(--ipg-gold);
-    color: #fff;
-    font-size: clamp(19px, 2vw, 23px);
+    padding: 24px 28px;
+    border-left: 4px solid var(--ipg-red);
+    border-radius: 0 14px 14px 0;
+    background: #fff;
+    color: var(--ipg-teal);
+    font-size: clamp(18px, 2vw, 21px);
     font-weight: 600;
-    line-height: 1.45;
+    line-height: 1.5;
   }
 
   #ipg-rating .ipg-steps {
@@ -703,29 +703,33 @@
   }
 
   #ipg-rating .ipg-step {
-    background: var(--ipg-navy-2);
-    border: 1px solid var(--ipg-line);
+    background: #fff;
     border-radius: 18px;
     padding: 30px;
   }
 
   #ipg-rating .ipg-step__num {
-    display: block;
-    color: var(--ipg-gold);
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(232, 14, 72, .1);
+    color: var(--ipg-red);
     font-size: 14px;
-    font-weight: 800;
-    letter-spacing: .12em;
+    font-weight: 700;
     margin-bottom: 18px;
   }
 
   #ipg-rating .ipg-step h3 {
-    color: #fff;
-    font-size: 21px;
-    font-weight: 700;
+    color: var(--ipg-teal);
+    font-size: 20px;
+    font-weight: 600;
     margin-bottom: 10px;
   }
 
   #ipg-rating .ipg-step p {
+    color: var(--ipg-muted);
     font-size: 15px;
   }
 
@@ -736,9 +740,7 @@
     z-index: 2147483000;
     display: flex;
     flex-direction: column;
-    background:
-      radial-gradient(800px 400px at 100% 0%, rgba(47, 124, 246, .16), transparent 60%),
-      var(--ipg-navy);
+    background: linear-gradient(180deg, var(--ipg-aqua) 0%, #fff 70%);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -756,10 +758,10 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    color: var(--ipg-muted);
+    color: var(--ipg-teal);
     font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .14em;
+    font-weight: 600;
+    letter-spacing: .12em;
     text-transform: uppercase;
   }
 
@@ -768,15 +770,15 @@
     height: 40px;
     border: 1px solid var(--ipg-line);
     border-radius: 50%;
-    background: transparent;
-    color: var(--ipg-muted);
+    background: #fff;
+    color: var(--ipg-teal);
     font-size: 15px;
     cursor: pointer;
   }
 
   #ipg-rating .ipg-progress {
-    height: 3px;
-    background: rgba(255, 255, 255, .07);
+    height: 4px;
+    background: var(--ipg-aqua-2);
     flex-shrink: 0;
   }
 
@@ -784,7 +786,7 @@
     display: block;
     height: 100%;
     width: 0;
-    background: linear-gradient(90deg, var(--ipg-blue), var(--ipg-blue-2));
+    background: var(--ipg-orange);
     transition: width .35s var(--ipg-ease);
   }
 
@@ -815,20 +817,20 @@
     font-weight: 600;
     letter-spacing: .08em;
     text-transform: uppercase;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
 
   #ipg-rating .ipg-q__cat {
-    color: var(--ipg-gold);
+    color: var(--ipg-red);
     margin-left: 8px;
   }
 
   #ipg-rating .ipg-q__title {
-    color: #fff;
-    font-size: clamp(23px, 3.4vw, 32px);
-    font-weight: 700;
-    letter-spacing: -.02em;
-    line-height: 1.25;
+    color: var(--ipg-teal);
+    font-size: clamp(22px, 3.2vw, 30px);
+    font-weight: 600;
+    letter-spacing: -.01em;
+    line-height: 1.3;
     margin-bottom: 28px;
     outline: none;
   }
@@ -849,22 +851,23 @@
     gap: 16px;
     width: 100%;
     padding: 20px 22px;
-    border: 2px solid transparent;
+    border: 2px solid var(--ipg-line);
     border-radius: var(--ipg-radius);
-    background: var(--ipg-paper);
-    color: var(--ipg-ink);
+    background: #fff;
+    color: var(--ipg-teal);
     font: inherit;
     font-size: 16px;
     font-weight: 500;
-    line-height: 1.45;
+    line-height: 1.5;
     text-align: left;
     cursor: pointer;
+    box-shadow: 0 8px 20px -16px rgba(17, 66, 83, .5);
     transition: transform .15s var(--ipg-ease), border-color .15s, background .15s;
   }
 
   #ipg-rating .ipg-answer:hover {
     transform: translateY(-2px);
-    border-color: var(--ipg-blue-2);
+    border-color: var(--ipg-teal);
   }
 
   #ipg-rating .ipg-answer__key {
@@ -874,19 +877,19 @@
     width: 30px;
     height: 30px;
     border-radius: 8px;
-    background: rgba(11, 26, 46, .08);
-    color: var(--ipg-ink);
+    background: var(--ipg-aqua);
+    color: var(--ipg-teal);
     font-size: 13px;
-    font-weight: 800;
+    font-weight: 700;
   }
 
   #ipg-rating .ipg-answer.is-selected {
-    border-color: var(--ipg-blue);
-    background: #fff;
+    border-color: var(--ipg-orange);
+    background: #fff7f5;
   }
 
   #ipg-rating .ipg-answer.is-selected .ipg-answer__key {
-    background: var(--ipg-blue);
+    background: var(--ipg-orange);
     color: #fff;
   }
 
@@ -914,16 +917,12 @@
     color: var(--ipg-muted);
     font: inherit;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
   }
 
   #ipg-rating .ipg-back:hover {
-    color: #fff;
-  }
-
-  #ipg-rating .ipg-back[hidden] {
-    display: none;
+    color: var(--ipg-teal);
   }
 
   #ipg-rating .ipg-actions {
@@ -942,10 +941,11 @@
   #ipg-rating .ipg-form {
     display: grid;
     gap: 16px;
-    background: var(--ipg-navy-2);
+    background: #fff;
     border: 1px solid var(--ipg-line);
     border-radius: 18px;
     padding: 28px;
+    box-shadow: 0 30px 60px -40px rgba(17, 66, 83, .45);
   }
 
   #ipg-rating .ipg-form label {
@@ -954,7 +954,7 @@
   }
 
   #ipg-rating .ipg-form label span {
-    color: var(--ipg-text);
+    color: var(--ipg-teal);
     font-size: 14px;
     font-weight: 600;
   }
@@ -962,34 +962,34 @@
   #ipg-rating .ipg-form label em {
     color: var(--ipg-muted);
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   #ipg-rating .ipg-form input {
     width: 100%;
-    min-height: 54px;
+    min-height: 52px;
     padding: 0 16px;
-    border: 2px solid transparent;
+    border: 2px solid var(--ipg-line);
     border-radius: 12px;
-    background: var(--ipg-paper);
-    color: var(--ipg-ink);
+    background: var(--ipg-card);
+    color: var(--ipg-teal);
     font: inherit;
     font-size: 16px;
   }
 
   #ipg-rating .ipg-form input:focus {
     outline: none;
-    border-color: var(--ipg-blue);
+    border-color: var(--ipg-teal);
+    background: #fff;
   }
 
   #ipg-rating .ipg-form input[aria-invalid="true"] {
-    border-color: #ff7a7a;
+    border-color: var(--ipg-red);
   }
 
   #ipg-rating .ipg-form__error {
-    color: #ff9a9a;
+    color: var(--ipg-red);
     font-size: 14px;
-    min-height: 0;
   }
 
   #ipg-rating .ipg-form__error:empty {
@@ -999,7 +999,7 @@
   #ipg-rating .ipg-form__privacy {
     color: var(--ipg-muted);
     font-size: 12.5px;
-    line-height: 1.5;
+    line-height: 1.55;
   }
 
   #ipg-rating .ipg-form__privacy a {
@@ -1009,7 +1009,16 @@
   /* Results */
   #ipg-rating .ipg-results__hero {
     text-align: center;
-    margin-bottom: 36px;
+    margin-bottom: 20px;
+    padding: 36px 24px;
+    background: #fff;
+    border: 1px solid var(--ipg-line);
+    border-radius: 22px;
+    box-shadow: 0 30px 60px -40px rgba(17, 66, 83, .45);
+  }
+
+  #ipg-rating .ipg-results__hero .ipg-eyebrow {
+    margin-bottom: 4px;
   }
 
   #ipg-rating .ipg-results__score {
@@ -1017,31 +1026,31 @@
   }
 
   #ipg-rating .ipg-results__num {
-    padding-top: 68px;
+    padding-top: 66px;
   }
 
   #ipg-rating .ipg-results__num strong {
-    font-size: 58px;
+    font-size: 56px;
   }
 
   #ipg-rating .ipg-results__level {
     display: inline-block;
-    margin: 10px 0 22px;
-    padding: 6px 16px;
-    border: 1px solid rgba(212, 169, 78, .45);
+    margin: 10px 0 20px;
+    padding: 6px 18px;
     border-radius: 999px;
-    color: var(--ipg-gold-2);
+    background: var(--ipg-teal);
+    color: #fff;
     font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .12em;
+    font-weight: 600;
+    letter-spacing: .1em;
     text-transform: uppercase;
   }
 
   #ipg-rating .ipg-results__headline {
-    color: #fff;
-    font-size: clamp(21px, 2.6vw, 26px);
-    font-weight: 700;
-    line-height: 1.3;
+    color: var(--ipg-teal);
+    font-size: clamp(20px, 2.6vw, 25px);
+    font-weight: 600;
+    line-height: 1.35;
     max-width: 600px;
     margin: 0 auto 12px;
   }
@@ -1054,7 +1063,7 @@
 
   #ipg-rating .ipg-results__panel,
   #ipg-rating .ipg-insight {
-    background: var(--ipg-navy-2);
+    background: #fff;
     border: 1px solid var(--ipg-line);
     border-radius: 18px;
     padding: 26px;
@@ -1064,8 +1073,8 @@
   #ipg-rating .ipg-insight__label {
     color: var(--ipg-muted);
     font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .14em;
+    font-weight: 600;
+    letter-spacing: .12em;
     text-transform: uppercase;
     margin-bottom: 18px;
   }
@@ -1081,20 +1090,21 @@
     display: flex;
     justify-content: space-between;
     gap: 12px;
+    color: var(--ipg-teal);
     font-size: 15px;
     font-weight: 600;
-    color: #fff;
     margin-bottom: 8px;
   }
 
   #ipg-rating .ipg-bars__row b {
+    font-weight: 600;
     font-variant-numeric: tabular-nums;
   }
 
   #ipg-rating .ipg-bars__track {
     height: 8px;
     border-radius: 8px;
-    background: rgba(255, 255, 255, .08);
+    background: var(--ipg-aqua-2);
     overflow: hidden;
   }
 
@@ -1103,16 +1113,16 @@
     height: 100%;
     width: 0;
     border-radius: inherit;
-    background: var(--ipg-blue);
+    background: var(--ipg-teal);
     transition: width 1.1s var(--ipg-ease);
   }
 
   #ipg-rating .ipg-bars li.is-weak .ipg-bars__fill {
-    background: var(--ipg-gold);
+    background: var(--ipg-red);
   }
 
   #ipg-rating .ipg-bars li.is-weak .ipg-bars__row b {
-    color: var(--ipg-gold-2);
+    color: var(--ipg-red);
   }
 
   #ipg-rating .ipg-results__cards {
@@ -1123,9 +1133,9 @@
   }
 
   #ipg-rating .ipg-insight h4 {
-    color: #fff;
-    font-size: 20px;
-    font-weight: 700;
+    color: var(--ipg-teal);
+    font-size: 19px;
+    font-weight: 600;
     margin: -8px 0 10px;
   }
 
@@ -1134,41 +1144,43 @@
     font-size: 15px;
   }
 
-  #ipg-rating .ipg-insight--gold {
-    border-color: rgba(212, 169, 78, .45);
-    background: linear-gradient(160deg, rgba(212, 169, 78, .10), var(--ipg-navy-2) 60%);
+  #ipg-rating .ipg-insight--opportunity {
+    border: 1px solid rgba(232, 14, 72, .3);
+    border-top: 4px solid var(--ipg-red);
+    background: #fff6f8;
   }
 
-  #ipg-rating .ipg-insight--gold .ipg-insight__label {
-    color: var(--ipg-gold);
+  #ipg-rating .ipg-insight--opportunity .ipg-insight__label {
+    color: var(--ipg-red);
+  }
+
+  #ipg-rating .ipg-insight--next {
+    background: var(--ipg-aqua);
   }
 
   #ipg-rating .ipg-insight--next p:not(.ipg-insight__label) {
-    color: var(--ipg-text);
-    font-size: 17px;
+    color: var(--ipg-teal);
+    font-size: 16px;
   }
 
   #ipg-rating .ipg-results__cta {
     margin-top: 28px;
-    padding: 36px 28px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #12305a, var(--ipg-navy-2));
-    border: 1px solid rgba(91, 155, 255, .35);
+    padding: 38px 28px;
+    border-radius: 22px;
+    background: var(--ipg-teal);
     text-align: center;
   }
 
   #ipg-rating .ipg-results__cta h3 {
     color: #fff;
-    font-size: clamp(22px, 3vw, 28px);
-    font-weight: 800;
-    letter-spacing: -.02em;
-    line-height: 1.2;
+    font-size: clamp(21px, 3vw, 27px);
+    font-weight: 700;
+    line-height: 1.25;
     margin-bottom: 10px;
-    text-transform: uppercase;
   }
 
   #ipg-rating .ipg-results__cta p {
-    color: var(--ipg-muted);
+    color: var(--ipg-on-teal-muted);
     margin-bottom: 24px;
   }
 
@@ -1194,10 +1206,6 @@
   }
 
   @media (max-width: 640px) {
-    #ipg-rating {
-      font-size: 16px;
-    }
-
     #ipg-rating .ipg-btn {
       width: 100%;
     }
@@ -1257,7 +1265,7 @@
       // Your booking page (funnel step with the 15-Minute Portfolio Clarity Call calendar)
       BOOKING_URL: "/portfolio-clarity-call",
       PRIVACY_URL: "/privacy-policy",
-      // Light/white logo for the dark background. Leave empty to hide.
+      // Full-colour IPG logo URL. Leave empty to hide.
       LOGO_URL: "",
       CAMPAIGN: "Rate Your Property Portfolio"
     };
@@ -1634,7 +1642,7 @@
       // Animate gauge, number and bars
       var gauge = $("[data-ipg-r-gauge]");
       var num = $("[data-ipg-r-score]");
-      gauge.style.stroke = r.rating < 55 ? "var(--ipg-gold)" : "var(--ipg-blue)";
+      gauge.style.stroke = r.rating < 55 ? "var(--ipg-red)" : "var(--ipg-orange)";
       gauge.style.strokeDashoffset = GAUGE_LENGTH;
       num.textContent = "0";
       requestAnimationFrame(function () {
