@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hemavik Brand Board</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Brand identity guidelines for Hemavik JK Private Limited: logo, colour, typography, voice and components.">
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/hemavik.css">
+<style>
+  .bb-head { padding-block: 56px 40px; display: grid; gap: 20px; }
+  .bb-head h1 { font-size: var(--step-4); letter-spacing: 0.04em; }
+  .bb-head .meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+  section.bb { padding-block: 48px; border-top: 1px solid var(--neelkanth-3); }
+  .bb-title { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-bottom: 28px; }
+  .bb-title h2 { font-size: var(--step-3); }
+  .bb-title p { color: var(--bhasma); max-width: 62ch; }
+
+  /* Name story */
+  .name-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .name-cell { padding: 24px; background: var(--neelkanth-2); border-radius: var(--radius); display: grid; gap: 10px; align-content: start; }
+  .name-cell .deva { font-family: var(--font-display); font-size: 2.2rem; color: var(--hema); line-height: 1; }
+  .name-cell h3 { font-size: var(--step-1); }
+  .name-cell p { color: var(--bhasma); font-size: 0.95rem; }
+
+  /* Logo plates */
+  .logo-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .plate { border-radius: var(--radius); padding: 40px 24px; display: grid; place-items: center; min-height: 200px; position: relative; }
+  .plate figcaption { position: absolute; left: 14px; bottom: 12px; font: 500 0.7rem/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; }
+  .plate-dark { background: var(--neelkanth-2); }
+  .plate-dark figcaption { color: var(--bhasma); }
+  .plate-ivory { background: var(--kailash); }
+  .plate-ivory figcaption { color: #5B6275; }
+  .plate-gold { background: var(--hema); }
+  .plate-gold figcaption { color: var(--ink); }
+  .plate-ivory .logo { color: var(--ink); }
+  .plate-ivory .logo svg { color: var(--hema-deep); }
+  .plate-ivory .logo-word small { color: #5B6275; }
+  .plate-gold .logo svg { width: 88px; height: 88px; color: var(--neelkanth); }
+  .plate .logo svg { width: 56px; height: 56px; }
+  .plate .logo-word b { font-size: 1.8rem; }
+  figure { margin: 0; }
+
+  .anatomy { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); margin-top: 24px; align-items: center; }
+  @media (min-width: 760px) { .anatomy { grid-template-columns: 280px minmax(0, 1fr); } }
+  .anatomy-art { background: var(--neelkanth-2); border-radius: var(--radius); padding: 24px; }
+  .anatomy-art svg { display: block; width: 100%; height: auto; }
+  .anatomy ol { margin: 0; padding-left: 1.2em; display: grid; gap: 10px; color: var(--bhasma); }
+  .anatomy ol b { color: var(--kailash); font-weight: 600; }
+
+  .rules { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 24px; }
+  .rule { padding: 16px 18px; border: 1px solid var(--neelkanth-3); border-radius: var(--radius); font-size: 0.92rem; color: var(--bhasma); }
+  .rule b { display: block; color: var(--kailash); margin-bottom: 4px; font-weight: 600; }
+
+  /* Palette */
+  .swatches { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+  .sw { border-radius: var(--radius); overflow: hidden; background: var(--neelkanth-2); display: grid; grid-template-rows: 120px auto; }
+  .sw-chip { display: flex; align-items: flex-end; padding: 10px 12px; font: 500 0.7rem/1 var(--font-mono); letter-spacing: .1em; }
+  .sw-info { padding: 14px; display: grid; gap: 4px; }
+  .sw-info b { font-weight: 600; }
+  .sw-info code { font-family: var(--font-mono); font-size: 0.8rem; color: var(--hema-light); }
+  .sw-info span { font-size: 0.82rem; color: var(--bhasma); }
+  .copy-hex { background: none; border: 0; padding: 0; cursor: pointer; text-align: left; font: inherit; color: inherit; }
+  .ratio { display: flex; height: 18px; border-radius: 3px; overflow: hidden; margin-top: 18px; }
+  .ratio-legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; font: 0.75rem var(--font-mono); color: var(--bhasma); }
+
+  /* Type */
+  .type-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .spec { padding: 24px; background: var(--neelkanth-2); border-radius: var(--radius); display: grid; gap: 12px; align-content: start; min-width: 0; }
+  .spec .big { font-size: 3.4rem; line-height: 1; color: var(--hema); }
+  .spec .alpha { color: var(--bhasma); word-break: break-all; font-size: 0.95rem; }
+  .spec .role { font: 500 0.7rem var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--bhasma); }
+  .scale { margin-top: 24px; display: grid; gap: 14px; }
+  .scale-row { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 16px; align-items: baseline; border-bottom: 1px solid var(--neelkanth-3); padding-bottom: 12px; }
+  .scale-row code { font: 0.75rem var(--font-mono); color: var(--bhasma); }
+
+  /* Voice */
+  .voice-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .trait { padding: 22px; border-top: 2px solid var(--hema); background: var(--neelkanth-2); border-radius: 0 0 var(--radius) var(--radius); display: grid; gap: 8px; align-content: start; }
+  .trait h3 { font-size: var(--step-1); }
+  .trait p { color: var(--bhasma); font-size: 0.95rem; }
+  .dodont { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 20px; }
+  .dodont div { padding: 20px; border-radius: var(--radius); border: 1px solid var(--neelkanth-3); }
+  .dodont h4 { margin: 0 0 10px; font: 600 0.75rem var(--font-mono); letter-spacing: .12em; text-transform: uppercase; }
+  .dodont .do h4 { color: var(--ganga); }
+  .dodont .dont h4 { color: #E08A7A; }
+  .dodont ul { margin: 0; padding-left: 1.1em; display: grid; gap: 8px; color: var(--kailash); }
+
+  /* Components */
+  .comp-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .comp { padding: 24px; background: var(--neelkanth-2); border-radius: var(--radius); display: grid; gap: 16px; align-content: start; }
+  .comp .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .comp-label { font: 500 0.7rem var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--bhasma); }
+  .node { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--neelkanth-3); border-radius: var(--radius); background: var(--neelkanth); }
+  .node i { width: 30px; height: 30px; border-radius: 6px; display: grid; place-items: center; background: color-mix(in srgb, var(--hema) 16%, transparent); color: var(--hema); font: 600 0.72rem var(--font-mono); font-style: normal; flex: none; }
+  .node span { font-size: 0.9rem; }
+  .node small { display: block; color: var(--bhasma); font: 0.7rem var(--font-mono); }
+
+  /* Applications */
+  .app-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); align-items: start; }
+  .card-front, .card-back { aspect-ratio: 85 / 55; max-width: 100%; border-radius: 8px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; }
+  .card-front { background: var(--neelkanth-2); border: 1px solid var(--neelkanth-3); }
+  .card-back { background: var(--kailash); color: var(--ink); }
+  .card-back .who b { font-family: var(--font-display); font-weight: 400; font-size: 1.3rem; display: block; }
+  .card-back .who span { font-size: 0.8rem; color: #5B6275; }
+  .card-back .contact { font: 0.72rem/1.7 var(--font-mono); color: var(--ink); }
+  .card-back .contact em { color: var(--hema-deep); font-style: normal; }
+  .social { aspect-ratio: 1; max-width: 100%; border-radius: 8px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between;
+    background:
+      radial-gradient(circle at 85% 12%, color-mix(in srgb, var(--hema) 28%, transparent), transparent 45%),
+      var(--neelkanth-2);
+    border: 1px solid var(--neelkanth-3); }
+  .social h3 { font-size: 1.9rem; }
+  .social h3 em { color: var(--hema); font-style: normal; }
+  .app-cap { font: 500 0.7rem var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--bhasma); margin-top: 10px; }
+
+  .bb-foot { padding-block: 40px 56px; border-top: 1px solid var(--neelkanth-3); color: var(--bhasma); font-size: 0.85rem; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; }
+
+  .toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--hema); color: var(--ink); padding: 10px 16px; border-radius: var(--radius); font: 600 0.85rem var(--font-body); }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="hv-mark" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <rect x="19" y="18" width="5" height="28" rx="1" fill="currentColor"/>
+    <rect x="40" y="18" width="5" height="28" rx="1" fill="currentColor"/>
+    <rect x="19" y="32" width="26" height="4" fill="currentColor"/>
+    <path d="M26 24 A6 6 0 0 0 38 24 A6 3.5 0 0 1 26 24 Z" fill="currentColor"/>
+    <circle cx="32" cy="41" r="2.2" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<header class="wrap bb-head">
+  <a class="logo" href="index.html" aria-label="Hemavik home">
+    <svg aria-hidden="true"><use href="#hv-mark"/></svg>
+    <span class="logo-word"><b>HEMAVIK</b><small>JK PRIVATE LIMITED</small></span>
+  </a>
+  <p class="eyebrow">Brand board · Version 1.0 · October 2026</p>
+  <h1>Pure systems.<br>Golden growth.</h1>
+  <p class="lede">The identity for Hemavik, a studio that builds GoHighLevel CRMs, n8n automations and growth marketing for businesses that want their operations to run clean.</p>
+  <div class="meta">
+    <span class="hallmark" title="Hallmark device"><span>999</span><span>HEMAVIK</span><span>JK</span></span>
+    <span class="chip">GHL</span><span class="chip">n8n</span><span class="chip">Marketing</span>
+  </div>
+</header>
+
+<hr class="thread">
+
+<main>
+<!-- 1. Name -->
+<section class="bb wrap" id="name">
+  <div class="bb-title">
+    <p class="eyebrow">01 · The name</p>
+    <h2>What Hemavik means</h2>
+    <p>The name comes from the Sanskrit root <em>hema</em>, gold. It carries three ideas, and every brand decision on this board traces back to one of them.</p>
+  </div>
+  <div class="name-grid">
+    <div class="name-cell">
+      <span class="deva" lang="sa">हेम</span>
+      <h3>Made of gold</h3>
+      <p>Work that holds its value. We build systems that keep paying back long after launch. Expressed through the Hema gold accent.</p>
+    </div>
+    <div class="name-cell">
+      <span class="deva">999</span>
+      <h3>Purity</h3>
+      <p>Fine gold is hallmarked 999: nothing extra. Clean automations, clean data, no clutter. Expressed through generous space and ivory.</p>
+    </div>
+    <div class="name-cell">
+      <span class="deva" lang="sa">शिव</span>
+      <h3>Lord Shiva</h3>
+      <p>Stillness behind constant motion. The crescent, the third eye and the Neelkanth indigo come from this association.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Logo -->
+<section class="bb wrap" id="logo">
+  <div class="bb-title">
+    <p class="eyebrow">02 · Logo</p>
+    <h2>The temple gate mark</h2>
+    <p>An H built as two pillars of a temple gateway, held inside a gold coin. Shiva's crescent rests above the crossbar and the bindu, the third eye, sits below it.</p>
+  </div>
+  <div class="logo-grid">
+    <figure class="plate plate-dark">
+      <span class="logo"><svg aria-hidden="true"><use href="#hv-mark"/></svg><span class="logo-word"><b>HEMAVIK</b><small>JK PRIVATE LIMITED</small></span></span>
+      <figcaption>Primary · on Neelkanth</figcaption>
+    </figure>
+    <figure class="plate plate-ivory">
+      <span class="logo"><svg aria-hidden="true"><use href="#hv-mark"/></svg><span class="logo-word"><b>HEMAVIK</b><small>JK PRIVATE LIMITED</small></span></span>
+      <figcaption>Reversed · on Kailash ivory</figcaption>
+    </figure>
+    <figure class="plate plate-gold">
+      <span class="logo"><svg aria-hidden="true"><use href="#hv-mark"/></svg></span>
+      <figcaption>Mark only · avatars, favicon, stamp</figcaption>
+    </figure>
+  </div>
+
+  <div class="anatomy">
+    <div class="anatomy-art">
+      <svg viewBox="0 0 120 120" role="img" aria-label="Logo anatomy with clear space">
+        <rect x="4" y="4" width="112" height="112" fill="none" stroke="#3FA7A0" stroke-dasharray="3 3" stroke-width="0.8"/>
+        <g transform="translate(28 28)" color="#D4A63A"><use href="#hv-mark" width="64" height="64"/></g>
+        <text x="60" y="15" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6" fill="#A7ADBD">clear space = ½ mark</text>
+        <circle cx="60" cy="52" r="5" fill="none" stroke="#F6F1E4" stroke-width="0.6"/>
+        <text x="101" y="53" font-family="JetBrains Mono, monospace" font-size="7" fill="#F6F1E4">1</text>
+        <line x1="70" y1="51" x2="98" y2="51" stroke="#F6F1E4" stroke-width="0.5"/>
+        <text x="101" y="69" font-family="JetBrains Mono, monospace" font-size="7" fill="#F6F1E4">2</text>
+        <line x1="74" y1="67" x2="98" y2="67" stroke="#F6F1E4" stroke-width="0.5"/>
+        <text x="101" y="85" font-family="JetBrains Mono, monospace" font-size="7" fill="#F6F1E4">3</text>
+        <line x1="65" y1="69" x2="98" y2="83" stroke="#F6F1E4" stroke-width="0.5"/>
+        <text x="12" y="98" font-family="JetBrains Mono, monospace" font-size="7" fill="#F6F1E4">4</text>
+        <line x1="20" y1="96" x2="39" y2="81" stroke="#F6F1E4" stroke-width="0.5"/>
+      </svg>
+    </div>
+    <ol>
+      <li><b>Crescent (chandra).</b> Shiva's moon. Calm intelligence at the top of every system.</li>
+      <li><b>Pillars.</b> The two sides of the business we join: marketing that brings leads in, operations that serve them.</li>
+      <li><b>Bindu.</b> The third eye. Insight: reporting, scoring and AI that see what people miss.</li>
+      <li><b>Gold coin.</b> The outer ring. Value that compounds. Keep clear space of half the mark's width around it.</li>
+    </ol>
+  </div>
+
+  <div class="rules">
+    <div class="rule"><b>Minimum size</b>24px on screen, 10mm in print for the mark. 120px wide for the full lockup.</div>
+    <div class="rule"><b>Approved colours</b>Gold on indigo, deep gold on ivory, indigo on gold. Nothing else.</div>
+    <div class="rule"><b>Never</b>Stretch it, add gradients or shadows, rotate it, or place it on busy photos.</div>
+    <div class="rule"><b>Files</b><code>assets/logo/</code> holds the lockups, the mark in gold and indigo, and the favicon.</div>
+  </div>
+</section>
+
+<!-- 3. Colour -->
+<section class="bb wrap" id="colour">
+  <div class="bb-title">
+    <p class="eyebrow">03 · Colour</p>
+    <h2>Night, gold and ash</h2>
+    <p>Indigo is the ground, gold is the light, ivory is used where we need a moment of purity. Tap a value to copy it.</p>
+  </div>
+  <div class="swatches">
+    <div class="sw"><div class="sw-chip" style="background:#0E1630;color:#A7ADBD;box-shadow:inset 0 0 0 1px #22305A">PRIMARY</div><div class="sw-info"><b>Neelkanth</b><button class="copy-hex" type="button"><code>#0E1630</code></button><span>Backgrounds, primary ground. RGB 14 22 48</span></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#D4A63A;color:#0B1124">ACCENT</div><div class="sw-info"><b>Hema Gold</b><button class="copy-hex" type="button"><code>#D4A63A</code></button><span>Logo, CTAs, highlights. RGB 212 166 58</span></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#F6F1E4;color:#0B1124">PURITY</div><div class="sw-info"><b>Kailash Ivory</b><button class="copy-hex" type="button"><code>#F6F1E4</code></button><span>Text on dark, light sections. RGB 246 241 228</span></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#A7ADBD;color:#0B1124">SUPPORT</div><div class="sw-info"><b>Bhasma Ash</b><button class="copy-hex" type="button"><code>#A7ADBD</code></button><span>Secondary text, captions. RGB 167 173 189</span></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#9C7420;color:#F6F1E4">ON IVORY</div><div class="sw-info"><b>Deep Gold</b><button class="copy-hex" type="button"><code>#9C7420</code></button><span>Gold text and logo on ivory. RGB 156 116 32</span></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#3FA7A0;color:#0B1124">STATE</div><div class="sw-info"><b>Ganga Teal</b><button class="copy-hex" type="button"><code>#3FA7A0</code></button><span>Live, success, "workflow running". RGB 63 167 160</span></div></div>
+  </div>
+  <div class="ratio" role="img" aria-label="Colour proportion: 60% Neelkanth, 20% Ivory, 10% Ash, 8% Gold, 2% Teal">
+    <span style="flex:60;background:#16213F"></span>
+    <span style="flex:20;background:#F6F1E4"></span>
+    <span style="flex:10;background:#A7ADBD"></span>
+    <span style="flex:8;background:#D4A63A"></span>
+    <span style="flex:2;background:#3FA7A0"></span>
+  </div>
+  <div class="ratio-legend"><span>60 Neelkanth</span><span>20 Ivory</span><span>10 Ash</span><span>8 Gold</span><span>2 Teal</span></div>
+</section>
+
+<!-- 4. Type -->
+<section class="bb wrap" id="type">
+  <div class="bb-title">
+    <p class="eyebrow">04 · Typography</p>
+    <h2>Inscription, voice and code</h2>
+    <p>Three free Google Fonts. Marcellus has the carved feel of temple inscriptions; Manrope keeps body copy modern and readable; JetBrains Mono speaks for the automation side.</p>
+  </div>
+  <div class="type-grid">
+    <div class="spec">
+      <span class="role">Display · Headlines</span>
+      <span class="big" style="font-family:var(--font-display)">Aa</span>
+      <b style="font-family:var(--font-display);font-size:1.6rem;font-weight:400">Marcellus</b>
+      <span class="alpha" style="font-family:var(--font-display)">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789</span>
+    </div>
+    <div class="spec">
+      <span class="role">Body · Interface</span>
+      <span class="big" style="font-family:var(--font-body);font-weight:600">Aa</span>
+      <b style="font-size:1.4rem">Manrope 400 / 600 / 700</b>
+      <span class="alpha">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789</span>
+    </div>
+    <div class="spec">
+      <span class="role">Utility · Labels, data</span>
+      <span class="big" style="font-family:var(--font-mono)">{ }</span>
+      <b style="font-family:var(--font-mono);font-size:1.15rem;font-weight:500">JetBrains Mono</b>
+      <span class="alpha" style="font-family:var(--font-mono)">WEBHOOK → GHL → n8n 200 OK</span>
+    </div>
+  </div>
+  <div class="scale">
+    <div class="scale-row"><code>H1 · 64</code><span style="font-family:var(--font-display);font-size:var(--step-4);line-height:1.05">Pure systems</span></div>
+    <div class="scale-row"><code>H2 · 40</code><span style="font-family:var(--font-display);font-size:var(--step-3)">Automation that holds value</span></div>
+    <div class="scale-row"><code>H3 · 26</code><span style="font-family:var(--font-display);font-size:var(--step-2)">GoHighLevel CRM setup</span></div>
+    <div class="scale-row"><code>Body · 16</code><span>We map your lead journey, then build it once, properly, in GoHighLevel and n8n.</span></div>
+    <div class="scale-row"><code>Label · 13</code><span class="eyebrow">Step 03 · Forge</span></div>
+  </div>
+</section>
+
+<!-- 5. Voice -->
+<section class="bb wrap" id="voice">
+  <div class="bb-title">
+    <p class="eyebrow">05 · Voice</p>
+    <h2>How Hemavik sounds</h2>
+    <p>Like a calm senior consultant: certain, plain-spoken, never hyped.</p>
+  </div>
+  <div class="voice-grid">
+    <div class="trait"><h3>Pure</h3><p>Short sentences. One idea at a time. Cut every word that does not carry weight.</p></div>
+    <div class="trait"><h3>Precious</h3><p>Talk about value the client keeps: hours saved, leads answered, revenue tracked.</p></div>
+    <div class="trait"><h3>Still</h3><p>Confident without shouting. No exclamation marks, no "revolutionary", no fake urgency.</p></div>
+  </div>
+  <div class="dodont">
+    <div class="do">
+      <h4>Say</h4>
+      <ul>
+        <li>Every new lead gets a WhatsApp reply in under a minute.</li>
+        <li>We build your pipeline once and document it.</li>
+        <li>You own the workflows. We keep them running.</li>
+      </ul>
+    </div>
+    <div class="dont">
+      <h4>Avoid</h4>
+      <ul>
+        <li>10X your business with AI magic!!!</li>
+        <li>Leverage synergistic omnichannel solutions.</li>
+        <li>Limited slots, book now before it's too late.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Components -->
+<section class="bb wrap" id="components">
+  <div class="bb-title">
+    <p class="eyebrow">06 · Interface</p>
+    <h2>Building blocks</h2>
+    <p>The website and client dashboards use these pieces. Workflow nodes borrow the shape of n8n so clients recognise them.</p>
+  </div>
+  <div class="comp-grid">
+    <div class="comp">
+      <span class="comp-label">Buttons</span>
+      <div class="row"><a class="btn btn-gold" href="#components">Book a strategy call</a><a class="btn btn-ghost" href="#components">See services</a></div>
+      <span class="comp-label">Chips &amp; hallmark</span>
+      <div class="row"><span class="chip chip-live">Live</span><span class="chip">GHL Snapshot</span><span class="hallmark"><span>999</span><span>HEMAVIK</span></span></div>
+    </div>
+    <div class="comp">
+      <span class="comp-label">Workflow nodes</span>
+      <div class="node"><i>FB</i><span>Lead Ad submitted<small>trigger</small></span></div>
+      <div class="node"><i>GHL</i><span>Create contact, move to "New lead"<small>gohighlevel</small></span></div>
+      <div class="node"><i>n8n</i><span>Score lead with AI, notify sales<small>workflow · 1.2s</small></span><span class="chip chip-live" style="margin-left:auto">Live</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Applications -->
+<section class="bb wrap" id="applications">
+  <div class="bb-title">
+    <p class="eyebrow">07 · Applications</p>
+    <h2>The brand in use</h2>
+  </div>
+  <div class="app-grid">
+    <div>
+      <div class="card-front">
+        <span class="hallmark" style="align-self:flex-end"><span>999</span><span>HEMAVIK</span></span>
+        <span class="logo"><svg aria-hidden="true"><use href="#hv-mark"/></svg><span class="logo-word"><b>HEMAVIK</b><small>JK PRIVATE LIMITED</small></span></span>
+      </div>
+      <p class="app-cap">Business card · front · 85 × 55 mm</p>
+    </div>
+    <div>
+      <div class="card-back">
+        <div class="who"><b>Kanchan Kanwar</b><span>Founder</span></div>
+        <div class="contact">
+          <em>W</em> hemavik.com<br>
+          <em>E</em> hello@hemavik.com<br>
+          <em>S</em> GoHighLevel · n8n · Marketing
+        </div>
+      </div>
+      <p class="app-cap">Business card · back</p>
+    </div>
+    <div>
+      <div class="social">
+        <span class="eyebrow">n8n · tip 04</span>
+        <h3>Missed calls should text back <em>by themselves.</em></h3>
+        <span class="logo"><svg aria-hidden="true" style="width:28px;height:28px"><use href="#hv-mark"/></svg><span class="logo-word"><b style="font-size:0.95rem">HEMAVIK</b></span></span>
+      </div>
+      <p class="app-cap">Instagram / LinkedIn post · 1080 × 1080</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="wrap bb-foot">
+  <span>© 2026 Hemavik JK Private Limited</span>
+  <span>Brand board v1.0 · <a href="index.html">View website</a></span>
+</footer>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+  (function () {
+    var toast = document.getElementById('toast');
+    var timer;
+    function show(msg) {
+      toast.textContent = msg;
+      toast.hidden = false;
+      clearTimeout(timer);
+      timer = setTimeout(function () { toast.hidden = true; }, 1600);
+    }
+    document.querySelectorAll('.copy-hex').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var hex = btn.textContent.trim();
+        var done = function () { show('Copied ' + hex); };
+        var fallback = function () {
+          var r = document.createRange(); r.selectNodeContents(btn);
+          var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+          show('Selected ' + hex + ', press Ctrl+C');
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(hex).then(done, fallback);
+        } else { fallback(); }
+      });
+    });
+  })();
+</script>
+</body>
+</html>
