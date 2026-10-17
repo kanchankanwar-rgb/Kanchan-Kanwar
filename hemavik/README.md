@@ -41,6 +41,11 @@ node _build/og-images.cjs    # writes assets/og/*.png and PNG icons
 
 Do not edit the generated `.html` files by hand (except `brand-board.html`); changes would be overwritten on the next build. Styles live in `assets/css/hemavik.css` (brand tokens) and `assets/css/site.css` (layout).
 
+## Photos & motion
+
+- Founder photos live in `assets/img/` (cropped to 4:5, metadata removed, JPG + WebP in 440 and 800 px). Founder name, role, quote and bio are in `FOUNDER` in `content.py`.
+- Animations: hero entrance, drifting clouds, scroll reveals, count-up stats, the gold line across process steps, the channel marquee and the connected "What we do" hub with flowing data pulses. All motion turns off for visitors who set "reduce motion" in their device settings, and content stays visible if scripts fail.
+
 ## Brand at a glance
 
 Colours are sampled from an image of Shiva meditating on Kailash: snow, clouds, glacier ice and slate shadow. Gold remains only as a small highlight for *hema*.

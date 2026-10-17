@@ -11,7 +11,7 @@ import sys
 from datetime import date
 
 sys.path.insert(0, os.path.dirname(__file__))
-from content import SITE, CATEGORIES, SERVICES, INDUSTRIES, PROCESS, COMMITMENTS, INSIGHTS, PAGES  # noqa: E402
+from content import SITE, CATEGORIES, SERVICES, INDUSTRIES, PROCESS, COMMITMENTS, INSIGHTS, PAGES, FOUNDER, CHANNELS  # noqa: E402
 from visuals import visual, thumb  # noqa: E402
 
 OUT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -74,7 +74,14 @@ def ld_org():
         "areaServed": ["IN", "Worldwide"],
         "knowsAbout": [SERVICES[x]["title"] for c in CATEGORIES for x in c["services"]],
         "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "email": SITE["email"], "availableLanguage": ["English", "Hindi"]},
+        "founder": ld_person(),
     }
+
+
+def ld_person():
+    return {"@type": "Person", "name": FOUNDER["name"], "jobTitle": FOUNDER["role"],
+            "image": f'{SITE["url"]}/assets/img/{FOUNDER["photo"]}.jpg', "worksFor": {"@id": ORG_ID},
+            "url": SITE["url"] + "/about.html#founder"}
 
 
 def ld_website():
@@ -273,6 +280,99 @@ def page_hero(eyebrow, title, lede, crumbs, r, extra="", side=""):
 
 # ---------------------------------------------------------------- pages
 
+def picture(r, name, alt, cls="", eager=False, sizes="(min-width: 900px) 420px, 90vw"):
+    load = 'fetchpriority="high"' if eager else 'loading="lazy"'
+    return f"""<picture class="{cls}">
+  <source type="image/webp" srcset="{r}assets/img/{name}-sm.webp 440w, {r}assets/img/{name}.webp 800w" sizes="{sizes}">
+  <img src="{r}assets/img/{name}.jpg" srcset="{r}assets/img/{name}-sm.jpg 440w, {r}assets/img/{name}.jpg 800w" sizes="{sizes}" width="800" height="1000" alt="{e(alt)}" {load} decoding="async">
+</picture>"""
+
+
+HUB_POS = ["a", "b", "c", "d"]   # top-left, top-right, bottom-left, bottom-right
+HUB_XY = {"a": (28.8, 22), "b": (131.2, 22), "c": (28.8, 78), "d": (131.2, 78)}
+
+
+def what_we_do(r):
+    nodes, panels, lines = [], [], []
+    for i, c in enumerate(CATEGORIES):
+        pos = HUB_POS[i]
+        x, y = HUB_XY[pos]
+        on = i == 0
+        lines.append(f'<path class="hub-line{" on" if on else ""}" data-line="{i}" d="M{x} {y} L80 50"/>'
+                     f'<path class="hub-pulse" style="--d:{i * 0.6}s" d="M{x} {y} L80 50" pathLength="100"/>')
+        chips = "".join(f'<span>{e(SERVICES[x]["title"])}</span>' for x in c["services"])
+        nodes.append(f"""<button class="hub-node pos-{pos}" type="button" role="tab" id="hub-tab-{i}" aria-controls="hub-panel-{i}" aria-selected="{str(on).lower()}" data-i="{i}">
+        <span class="hub-stage">{i + 1:02d} · {e(c["stage"])}</span>
+        <b>{e(c["title"])}</b>
+        <span class="hub-chips">{chips}</span>
+      </button>""")
+        links = "".join(
+            f'<li><a href="{r}services/{x}.html"><span><b>{e(SERVICES[x]["title"])}</b><small>{e(SERVICES[x]["short"])}</small></span>{arrow()}</a></li>'
+            for x in c["services"])
+        panels.append(f"""<div class="hub-panel" role="tabpanel" id="hub-panel-{i}" aria-labelledby="hub-tab-{i}"{"" if on else " hidden"}>
+      <div class="hub-copy">
+        <p class="eyebrow">Stage {i + 1:02d} · {e(c["stage"])}</p>
+        <h3>{e(c["stage_line"])}</h3>
+        <p>{e(c["blurb"])}</p>
+        <ul class="cap-list">{links}</ul>
+      </div>
+      <div class="hub-vis" aria-hidden="true">{visual(CAP_VIS[c["slug"]])}</div>
+    </div>""")
+    return f"""<section class="section wwd" id="what-we-do">
+  <div class="wrap">
+    <div class="section-head split">
+      <div><p class="eyebrow">What we do</p><h2>Eleven services. One team. One connected system.</h2></div>
+      <p class="lede">Most businesses buy marketing, software and automation from different suppliers, and leads fall through the gaps. With Hemavik, every service feeds one customer record, so each stage hands over to the next automatically.</p>
+    </div>
+    <div class="hub" data-hub>
+      <div class="hub-map" role="tablist" aria-label="Capabilities">
+        <svg class="hub-lines" viewBox="0 0 160 100" aria-hidden="true">{"".join(lines)}</svg>
+        <div class="hub-core">
+          <span class="ring"></span><span class="ring r2"></span>
+          <svg aria-hidden="true"><use href="#hv-mark"/></svg>
+          <b>One customer record</b>
+          <small>Every lead, message, call, booking and payment in one place</small>
+        </div>
+        {"".join(nodes)}
+      </div>
+      <div class="hub-panels">{"".join(panels)}</div>
+    </div>
+  </div>
+</section>
+"""
+
+
+def marquee():
+    items = "".join(f"<li>{e(c)}</li>" for c in CHANNELS)
+    return f"""<section class="channels" aria-label="Channels we connect">
+  <div class="wrap"><p class="eyebrow">Connected with the channels your customers already use</p></div>
+  <div class="marquee"><ul>{items}</ul><ul aria-hidden="true">{items}</ul></div>
+</section>
+"""
+
+
+def founder_band(r):
+    f = FOUNDER
+    return f"""<section class="section founder">
+  <div class="wrap founder-grid">
+    <figure class="founder-photo">{picture(r, f["photo"], f'{f["name"]}, {f["role"]} of Hemavik')}</figure>
+    <div class="founder-copy">
+      <p class="eyebrow">Meet the founder</p>
+      <blockquote><p>{e(f["quote"])}</p></blockquote>
+      <p class="founder-name"><b>{e(f["name"])}</b><span>{e(f["role"])}, Hemavik</span></p>
+      <a class="text-link" href="{r}about.html#founder">About Hemavik {arrow()}</a>
+    </div>
+  </div>
+</section>
+"""
+
+
+def stat_html(n, t):
+    num = "".join(ch for ch in n if ch.isdigit())
+    count = f' data-count="{num}"' if num and "/" not in n else ""
+    return f'<div class="stat"><b{count}>{e(n)}</b><span>{e(t)}</span></div>'
+
+
 CAP_VIS = {"growth": "digital-marketing", "engagement": "marketing-automation", "experience": "website-development", "ai": "ai-workflows"}
 
 
@@ -292,13 +392,7 @@ def home():
       <span class="feature-go">Explore {arrow()}</span>
     </a>""" for s, tag, line in featured
     )
-    caps = "".join(
-        f"""<div class="cap">
-      <div class="cap-head"><span class="cap-no">{i + 1:02d}</span><h3>{e(c["title"])}</h3><p>{e(c["blurb"])}</p><div class="cap-vis" aria-hidden="true">{visual(CAP_VIS[c["slug"]])}</div></div>
-      <ul class="cap-list">{"".join(f'<li><a href="services/{s}.html"><span><b>{e(SERVICES[s]["title"])}</b><small>{e(SERVICES[s]["short"])}</small></span>{arrow()}</a></li>' for s in c["services"])}</ul>
-    </div>""" for i, c in enumerate(CATEGORIES)
-    )
-    stats = "".join(f'<div class="stat"><b>{e(n)}</b><span>{e(t)}</span></div>' for n, t in COMMITMENTS)
+    stats = "".join(stat_html(n, t) for n, t in COMMITMENTS)
     inds = "".join(
         f'<a class="ind" href="industries.html#{s}"><h3>{e(t)}</h3><p>{e(p)}</p>{arrow()}</a>' for s, t, p, _ in INDUSTRIES
     )
@@ -337,16 +431,8 @@ def home():
   <div class="wrap feature-grid">{feat}</div>
 </section>
 
-<section class="section" id="what-we-do">
-  <div class="wrap">
-    <div class="section-head split">
-      <div><p class="eyebrow">What we do</p><h2>Eleven services. One team. One connected system.</h2></div>
-      <p class="lede">Most businesses buy marketing, software and automation from different suppliers, and leads fall through the gaps between them. We deliver all of it together.</p>
-    </div>
-    <div class="caps">{caps}</div>
-  </div>
-</section>
-
+{marquee()}
+{what_we_do(r)}
 <section class="stats-band">
   <div class="wrap stats">{stats}</div>
 </section>
@@ -361,7 +447,8 @@ def home():
   </div>
 </section>
 
-<section class="section" id="industries">
+{founder_band(r)}
+<section class="section section-raised" id="industries">
   <div class="wrap">
     <div class="section-head split">
       <div><p class="eyebrow">Industries</p><h2>Built for businesses that run on conversations</h2></div>
@@ -371,7 +458,7 @@ def home():
   </div>
 </section>
 
-<section class="section section-raised" id="insights">
+<section class="section" id="insights">
   <div class="wrap">
     <div class="section-head split">
       <div><p class="eyebrow">Insights</p><h2>Perspectives on growth, automation and AI</h2></div>
@@ -608,7 +695,19 @@ def about_page():
   </div>
 </section>
 
-<section class="stats-band"><div class="wrap stats">{"".join(f'<div class="stat"><b>{e(n)}</b><span>{e(t)}</span></div>' for n, t in COMMITMENTS)}</div></section>
+<section class="section section-raised founder-about" id="founder">
+  <div class="wrap founder-grid">
+    <figure class="founder-photo">{picture(r, FOUNDER["photo"], f'{FOUNDER["name"]}, {FOUNDER["role"]} of Hemavik')}</figure>
+    <div class="founder-copy">
+      <p class="eyebrow">Founder</p>
+      <h2>{e(FOUNDER["name"])}</h2>
+      {"".join(f"<p>{e(x)}</p>" for x in FOUNDER["bio"])}
+      <blockquote><p>{e(FOUNDER["quote"])}</p></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="stats-band"><div class="wrap stats">{"".join(stat_html(n, t) for n, t in COMMITMENTS)}</div></section>
 
 <section class="section">
   <div class="wrap">
@@ -645,6 +744,10 @@ def contact_page():
     body = f"""<section class="section">
   <div class="wrap contact-grid">
     <div class="contact-copy">
+      <div class="speak">
+        {picture(r, FOUNDER["photo_alt"], FOUNDER["name"], "speak-photo", sizes="96px")}
+        <p><small>You will speak with</small><b>{e(FOUNDER["name"])}</b><span>{e(FOUNDER["role"])}, Hemavik</span></p>
+      </div>
       <h2>What happens next</h2>
       <ol class="next-steps">
         <li><b>We reply within one working day</b> with a time for a 30-minute call.</li>

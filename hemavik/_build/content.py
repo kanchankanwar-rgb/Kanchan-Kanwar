@@ -10,27 +10,52 @@ SITE = {
     "locale": "en_IN",
 }
 
+FOUNDER = {
+    "name": "Kanchan Kanwar",
+    "role": "Founder",
+    "photo": "kanchan-kanwar",
+    "photo_alt": "kanchan-kanwar-2",
+    # Draft copy: edit to your own words.
+    "quote": "I started Hemavik to give growing businesses the kind of connected systems that large companies take for granted: marketing that brings in the right people, automation that follows up every lead, and AI that never misses a call.",
+    "bio": [
+        "Kanchan Kanwar founded Hemavik to bring marketing, automation and AI together under one roof, so business owners deal with one team instead of five suppliers.",
+        "Kanchan leads strategy and delivery on every project, from the first assay call to the systems that keep running long after launch.",
+    ],
+}
+
+# Channels shown in the moving strip on the home page.
+CHANNELS = ["Google Search", "YouTube", "Facebook", "Instagram", "WhatsApp", "SMS", "Email", "Phone calls",
+            "Website chat", "Google Business Profile", "LinkedIn", "Google Calendar", "Outlook", "Stripe", "PayPal", "Zoom"]
+
 CATEGORIES = [
     {
         "slug": "growth",
+        "stage": "Attract",
+        "stage_line": "Get found by the customers you want",
         "title": "Growth & Marketing",
         "blurb": "Bring the right people to you and turn attention into enquiries.",
         "services": ["digital-marketing", "google-meta-ads", "reputation-management"],
     },
     {
         "slug": "engagement",
+        "stage": "Engage",
+        "stage_line": "Capture, follow up and nurture every lead",
         "title": "Customer Engagement",
         "blurb": "Capture every lead, follow up automatically and keep customers coming back.",
         "services": ["crm-automation", "marketing-automation", "appointment-automation"],
     },
     {
         "slug": "experience",
+        "stage": "Convert",
+        "stage_line": "Turn visits into bookings and payments",
         "title": "Digital Experience",
         "blurb": "Websites, funnels and storefronts built to convert and easy to run.",
         "services": ["website-development", "commerce-memberships"],
     },
     {
         "slug": "ai",
+        "stage": "Automate",
+        "stage_line": "Let AI agents and workflows do the repetitive work",
         "title": "AI & Automation",
         "blurb": "AI agents and workflows that answer, decide and act around the clock.",
         "services": ["ai-workflows", "voice-ai", "conversational-ai"],
