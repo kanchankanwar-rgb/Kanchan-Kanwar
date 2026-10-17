@@ -94,13 +94,6 @@ p { margin: 0; }
   font-size: 1.35rem;
   letter-spacing: 0.22em;
 }
-.logo-word small {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.24em;
-  color: var(--bhasma);
-  margin-top: 5px;
-}
 
 /* ---------- Buttons ---------- */
 .btn {

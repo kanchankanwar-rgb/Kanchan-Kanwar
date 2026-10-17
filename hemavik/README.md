@@ -1,6 +1,6 @@
 # Hemavik website & brand board
 
-Static website and brand identity for **Hemavik JK Private Limited**: GoHighLevel, n8n automation and marketing.
+Static website and brand identity for **Hemavik**: GoHighLevel, n8n automation and marketing.
 
 The name comes from the Sanskrit *hema* (gold) and stands for three ideas: **made of gold** (lasting value), **purity** (clean systems, the 999 hallmark), and **Lord Shiva** (stillness behind motion: crescent, third eye, Neelkanth indigo).
 
