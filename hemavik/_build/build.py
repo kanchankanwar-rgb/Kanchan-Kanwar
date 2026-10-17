@@ -11,6 +11,7 @@ from datetime import date
 
 sys.path.insert(0, os.path.dirname(__file__))
 from content import SITE, CATEGORIES, SERVICES, INDUSTRIES, PROCESS, COMMITMENTS, INSIGHTS  # noqa: E402
+from visuals import visual, thumb  # noqa: E402
 
 OUT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 YEAR = date.today().year
@@ -185,24 +186,30 @@ def faq_html(faqs):
     return "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in faqs)
 
 
-def page_hero(eyebrow, title, lede, crumbs, r, extra=""):
+def page_hero(eyebrow, title, lede, crumbs, r, extra="", side=""):
     bc = " <span>/</span> ".join(
         f'<a href="{r}{href}">{e(t)}</a>' if href else f'<span aria-current="page">{e(t)}</span>' for t, href in crumbs
     )
     return f"""<section class="page-hero">
   {MOUNTAINS}
-  <div class="wrap page-hero-inner">
-    <nav class="crumbs" aria-label="Breadcrumb">{bc}</nav>
-    <p class="eyebrow">{e(eyebrow)}</p>
-    <h1>{title}</h1>
-    <p class="lede">{e(lede)}</p>
-    {extra}
+  <div class="wrap page-hero-grid{' has-side' if side else ''}">
+    <div class="page-hero-inner">
+      <nav class="crumbs" aria-label="Breadcrumb">{bc}</nav>
+      <p class="eyebrow">{e(eyebrow)}</p>
+      <h1>{title}</h1>
+      <p class="lede">{e(lede)}</p>
+      {extra}
+    </div>
+    {f'<div class="hero-visual">{side}<p class="vis-note">Illustrative example</p></div>' if side else ''}
   </div>
 </section>
 """
 
 
 # ---------------------------------------------------------------- pages
+
+CAP_VIS = {"growth": "digital-marketing", "engagement": "marketing-automation", "experience": "website-development", "ai": "ai-workflows"}
+
 
 def home():
     r = ""
@@ -213,6 +220,7 @@ def home():
     ]
     feat = "".join(
         f"""<a class="feature" href="services/{s}.html">
+      {thumb(s)}
       <span class="feature-tag">{e(tag)}</span>
       <h3>{e(SERVICES[s]["title"])}</h3>
       <p>{e(line)}</p>
@@ -221,7 +229,7 @@ def home():
     )
     caps = "".join(
         f"""<div class="cap">
-      <div class="cap-head"><span class="cap-no">{i + 1:02d}</span><h3>{e(c["title"])}</h3><p>{e(c["blurb"])}</p></div>
+      <div class="cap-head"><span class="cap-no">{i + 1:02d}</span><h3>{e(c["title"])}</h3><p>{e(c["blurb"])}</p><div class="cap-vis" aria-hidden="true">{visual(CAP_VIS[c["slug"]])}</div></div>
       <ul class="cap-list">{"".join(f'<li><a href="services/{s}.html"><span><b>{e(SERVICES[s]["title"])}</b><small>{e(SERVICES[s]["short"])}</small></span>{arrow()}</a></li>' for s in c["services"])}</ul>
     </div>""" for i, c in enumerate(CATEGORIES)
     )
@@ -321,6 +329,7 @@ def services_index():
     for i, c in enumerate(CATEGORIES):
         cards = "".join(
             f"""<a class="svc-card" href="services/{s}.html">
+          {thumb(s)}
           <h3>{e(SERVICES[s]["title"])}</h3>
           <p>{e(SERVICES[s]["short"])}</p>
           <span class="feature-go">Learn more {arrow()}</span>
@@ -354,12 +363,12 @@ def service_page(slug):
     outcomes = "".join(f"<li>{e(o)}</li>" for o in s["outcomes"])
     tools = "".join(f'<span class="chip">{e(t)}</span>' for t in s["tools"])
     related = "".join(
-        f"""<a class="svc-card" href="{x}.html"><span class="feature-tag">{e(cat_of(x)["title"])}</span><h3>{e(SERVICES[x]["title"])}</h3><p>{e(SERVICES[x]["short"])}</p><span class="feature-go">Learn more {arrow()}</span></a>"""
+        f"""<a class="svc-card" href="{x}.html">{thumb(x)}<span class="feature-tag">{e(cat_of(x)["title"])}</span><h3>{e(SERVICES[x]["title"])}</h3><p>{e(SERVICES[x]["short"])}</p><span class="feature-go">Learn more {arrow()}</span></a>"""
         for x in s["related"]
     )
     extra = f'<div class="hero-cta"><a class="btn btn-primary" href="{r}contact.html">Talk to an expert</a><a class="btn btn-ghost" href="#deliver">What we deliver</a></div>'
     hero = page_hero(c["title"], e(s["title"]), s["short"],
-                     [("Home", "index.html"), ("Services", "services.html"), (s["title"], None)], r, extra)
+                     [("Home", "index.html"), ("Services", "services.html"), (s["title"], None)], r, extra, visual(slug))
     body = f"""<section class="section intro-block">
   <div class="wrap intro-grid">
     <p class="eyebrow">Overview</p>
@@ -415,11 +424,14 @@ def service_page(slug):
             + cta_band(r, f'Talk to us about {s["title"]}') + footer(r))
 
 
+IND_VIS = {"healthcare": "voice-ai", "real-estate": "crm-automation", "education": "commerce-memberships", "home-services": "reputation-management", "retail": "conversational-ai", "professional-services": "appointment-automation", "wellness": "marketing-automation", "automotive": "google-meta-ads"}
+
+
 def industries_page():
     r = ""
     rows = "".join(
         f"""<article class="ind-row" id="{s}">
-      <div><span class="cap-no">{i + 1:02d}</span><h2>{e(t)}</h2></div>
+      <div><span class="cap-no">{i + 1:02d}</span><h2>{e(t)}</h2>{thumb(IND_VIS[s])}</div>
       <p class="ind-challenge">{e(p)}</p>
       <ul class="ind-list">{"".join(f"<li>{e(x)}</li>" for x in sol)}</ul>
     </article>""" for i, (s, t, p, sol) in enumerate(INDUSTRIES)
@@ -434,6 +446,7 @@ def industries_page():
 
 def insight_card(a, r):
     return f"""<a class="insight" href="{r}insights/{a["slug"]}.html">
+      <div class="cover cover-{a["slug"]}" aria-hidden="true">{MOUNTAINS}<span>{e(a["tag"])}</span></div>
       <span class="feature-tag">{e(a["tag"])} · {e(a["read"])}</span>
       <h3>{e(a["title"])}</h3>
       <p>{e(a["summary"])}</p>
