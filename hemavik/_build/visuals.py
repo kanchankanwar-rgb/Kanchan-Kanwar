@@ -19,12 +19,12 @@ V["crm-automation"] = window("Pipeline · Sales", """
 <div class="kanban">
   <div class="kcol"><p>New lead <b>4</b></p>
     <div class="kcard"><strong>Mehta Realty</strong><span>₹48,000</span><em>Meta ad</em></div>
-    <div class="kcard"><strong>Bloom Salon</strong><span>₹22,500</span><em>Website</em></div>
+    <div class="kcard"><strong>Bloom Florists</strong><span>₹22,500</span><em>Website</em></div>
     <div class="kcard ghost"></div>
   </div>
   <div class="kcol"><p>Qualified <b>3</b></p>
     <div class="kcard hot"><strong>Aarav Dental</strong><span>₹65,000</span><em>Google ad</em></div>
-    <div class="kcard"><strong>Nova Fitness</strong><span>₹30,000</span><em>WhatsApp</em></div>
+    <div class="kcard"><strong>Nova Interiors</strong><span>₹30,000</span><em>WhatsApp</em></div>
   </div>
   <div class="kcol"><p>Booked <b>2</b></p>
     <div class="kcard won"><strong>Sharma &amp; Co</strong><span>₹90,000</span><em>Voice AI</em></div>
@@ -88,8 +88,8 @@ V["appointment-automation"] = window("Calendar · This week", """
 <div class="cal">
   <span></span><b>Mon</b><b>Tue</b><b>Wed</b><b>Thu</b><b>Fri</b>
   <em>09</em><i></i><i class="bk">Rahul K.</i><i></i><i></i><i class="bk">Neha P.</i>
-  <em>10</em><i class="bk">Anita R.</i><i></i><i class="bk alt">Group class</i><i></i><i></i>
-  <em>11</em><i></i><i class="bk">Vikram S.</i><i class="bk alt">Group class</i><i class="bk new">AI booked</i><i></i>
+  <em>10</em><i class="bk">Anita R.</i><i></i><i class="bk alt">Workshop</i><i></i><i></i>
+  <em>11</em><i></i><i class="bk">Vikram S.</i><i class="bk alt">Workshop</i><i class="bk new">AI booked</i><i></i>
   <em>12</em><i class="bk">Sara M.</i><i></i><i></i><i class="bk">Imran A.</i><i class="bk">Dev T.</i>
 </div>
 <div class="toast-mock"><span class="dot-live"></span>Reminder sent to Rahul K. on WhatsApp</div>""", "Example booking calendar with appointments and an automatic reminder")
@@ -155,6 +155,23 @@ V["reputation-management"] = window("Reviews · Google & Facebook", f"""
 <div class="review"><div><strong>Kavya R.</strong>{stars(5)}</div><p>Booked online in a minute and got a reminder the day before. Lovely team.</p>
   <div class="reply"><small>AI suggested reply</small>Thank you, Kavya! We are glad booking was easy. See you next time.</div></div>
 <div class="review"><div><strong>Rohit J.</strong>{stars(4)}</div><p>Great service, a short wait at reception.</p></div>""", "Example review dashboard with rating, reviews and an AI suggested reply")
+
+
+V["integrations"] = window("Integrations · Live sync", """
+<div class="integ">
+  <div class="app"><i>CRM</i><span>CRM</span></div>
+  <div class="app"><i>WEB</i><span>Website</span></div>
+  <div class="app"><i>PAY</i><span>Payments</span></div>
+  <div class="hubdot"><span class="dot-live"></span>Synced</div>
+  <div class="app"><i>ACC</i><span>Accounting</span></div>
+  <div class="app"><i>XLS</i><span>Sheets</span></div>
+  <div class="app"><i>MSG</i><span>WhatsApp</span></div>
+</div>
+<div class="synclog">
+  <p><b>New order</b> Website → CRM → Accounting<small>2 s ago</small></p>
+  <p><b>Payment received</b> Payments → Invoice marked paid<small>1 min ago</small></p>
+  <p><b>Contact updated</b> CRM → Sheets<small>4 min ago</small></p>
+</div>""", "Example integrations dashboard syncing website, CRM, payments, accounting and messaging apps")
 
 
 def visual(slug):

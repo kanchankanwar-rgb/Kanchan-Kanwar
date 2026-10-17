@@ -322,7 +322,7 @@ def what_we_do(r):
     return f"""<section class="section wwd" id="what-we-do">
   <div class="wrap">
     <div class="section-head split">
-      <div><p class="eyebrow">What we do</p><h2>Eleven services. One team. One connected system.</h2></div>
+      <div><p class="eyebrow">What we do</p><h2>Twelve services. One team. One connected system.</h2></div>
       <p class="lede">Most businesses buy marketing, software and automation from different suppliers, and leads fall through the gaps. With Hemavik, every service feeds one customer record, so each stage hands over to the next automatically.</p>
     </div>
     <div class="hub" data-hub>
@@ -448,7 +448,6 @@ def home():
   </div>
 </section>
 
-{founder_band(r)}
 <section class="section section-raised" id="industries">
   <div class="wrap">
     <div class="section-head split">
@@ -594,7 +593,7 @@ def service_page(slug):
             + cta_band(r, f'Talk to us about {s["title"]}') + footer(r))
 
 
-IND_VIS = {"healthcare": "voice-ai", "real-estate": "crm-automation", "education": "commerce-memberships", "home-services": "reputation-management", "retail": "conversational-ai", "professional-services": "appointment-automation", "wellness": "marketing-automation", "automotive": "google-meta-ads"}
+IND_VIS = {"healthcare": "voice-ai", "real-estate": "crm-automation", "education": "commerce-memberships", "home-services": "reputation-management", "retail": "conversational-ai", "professional-services": "appointment-automation", "hospitality": "marketing-automation", "automotive": "google-meta-ads"}
 
 
 def industries_page():

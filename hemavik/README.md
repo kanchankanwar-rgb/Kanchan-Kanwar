@@ -4,13 +4,13 @@ Website and brand identity for **Hemavik**: digital marketing, paid ads, CRM and
 
 The name comes from the Sanskrit *hema* (gold) and stands for three ideas: **made of gold** (lasting value), **purity** (clean systems, the 999 hallmark) and **Lord Shiva** (stillness behind motion: crescent, third eye, Kailash colours).
 
-## Site map (20 pages)
+## Site map (21 pages)
 
 | Page | File |
 | --- | --- |
 | Home | `index.html` |
 | All services | `services.html` |
-| 11 service pages | `services/*.html` |
+| 12 service pages | `services/*.html` |
 | Industries | `industries.html` |
 | Insights + 3 articles | `insights.html`, `insights/*.html` |
 | About | `about.html` |
@@ -22,7 +22,7 @@ Services are grouped into four capabilities:
 - **Growth & Marketing**: Digital Marketing, Google & Meta Ads, Reputation & Reviews
 - **Customer Engagement**: CRM & Sales Automation, Marketing Automation, Appointments & Booking
 - **Digital Experience**: Website & Funnel Development; Payments, Courses & Communities
-- **AI & Automation**: AI-Powered Workflows, Voice AI Agents, Conversational AI & Chat
+- **AI & Automation**: AI-Powered Workflows, Third-Party Integrations, Voice AI Agents, Conversational AI & Chat
 
 ## Editing content
 

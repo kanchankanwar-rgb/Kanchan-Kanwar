@@ -58,7 +58,7 @@ CATEGORIES = [
         "stage_line": "Let AI agents and workflows do the repetitive work",
         "title": "AI & Automation",
         "blurb": "AI agents and workflows that answer, decide and act around the clock.",
-        "services": ["ai-workflows", "voice-ai", "conversational-ai"],
+        "services": ["ai-workflows", "integrations", "voice-ai", "conversational-ai"],
     },
 ]
 
@@ -361,13 +361,47 @@ SERVICES = {
             "Fewer human errors in repetitive tasks",
             "Clear alerts if anything needs attention",
         ],
-        "tools": ["n8n", "OpenAI", "Claude", "Google Workspace", "Slack", "REST APIs & webhooks"],
+        "tools": ["OpenAI", "Claude", "Google Workspace", "Slack", "REST APIs & webhooks"],
         "faqs": [
             ("Is our data safe with AI?", "We use business AI APIs whose providers do not train on your data by default, and we can host workflows on your own server."),
             ("What happens if a workflow fails?", "Every workflow has error handling and alerts. We are notified and fix issues quickly."),
             ("Do we need technical staff?", "No. We build, document and maintain everything for you."),
         ],
-        "related": ["crm-automation", "voice-ai", "conversational-ai"],
+        "related": ["integrations", "crm-automation", "voice-ai"],
+    },
+    "integrations": {
+        "seo_title": "Third-Party App Integration & API Services",
+        "seo_desc": "Connect your CRM, website, payment, accounting, messaging and spreadsheet tools with custom API integrations and webhooks so data syncs automatically.",
+        "title": "Third-Party Integrations",
+        "short": "Connect the apps you already use so data moves between them automatically.",
+        "intro": "Most businesses run on a mix of tools that do not talk to each other. We connect your CRM, website, payment gateway, accounting software, spreadsheets, messaging apps and industry tools through APIs and webhooks, so information is entered once and appears everywhere it is needed.",
+        "deliver": [
+            ("App-to-app integrations", "Two-way sync between your CRM and the tools your team uses every day."),
+            ("Custom API connections", "Integrations with any tool that offers an API, including Indian and industry-specific software."),
+            ("Webhooks & real-time triggers", "An event in one app instantly starts the right action in another."),
+            ("Data mapping & clean-up", "Fields matched correctly, duplicates prevented and formats standardised."),
+            ("Payment & accounting sync", "Payments, invoices and customers kept in step with your accounting software."),
+            ("Hosting on your server", "Integrations can run on your own server for full control of your data."),
+        ],
+        "steps": [
+            ("Audit", "We list your tools and every place data is copied by hand."),
+            ("Map", "We decide which data moves where, and when."),
+            ("Connect", "We build, test and secure each integration."),
+            ("Monitor", "We watch every sync and fix issues before they cause problems."),
+        ],
+        "outcomes": [
+            "No more copying data between apps",
+            "One source of truth for customers, orders and payments",
+            "Real-time updates across every tool",
+            "Alerts if any sync needs attention",
+        ],
+        "tools": ["REST APIs", "Webhooks", "Google Sheets", "Accounting software", "Payment gateways", "Slack & WhatsApp"],
+        "faqs": [
+            ("Can you connect a tool that is not on your list?", "Most likely. If the tool has an API or supports webhooks, we can connect it."),
+            ("Who maintains the integrations?", "We do. Every integration is monitored, and we update it when an app changes its API."),
+            ("Is our data secure?", "Connections use each app's official API with secure keys, and integrations can run on your own server."),
+        ],
+        "related": ["ai-workflows", "crm-automation", "commerce-memberships"],
     },
     "voice-ai": {
         "seo_title": "Voice AI Agents & AI Receptionist Services",
@@ -452,8 +486,8 @@ INDUSTRIES = [
      ["Conversion-focused stores and landing pages", "Abandoned cart and win-back campaigns", "WhatsApp and Instagram chat agents"]),
     ("professional-services", "Professional Services", "Law firms, accountants and consultants need a steady pipeline and organised client intake.",
      ["Client intake forms and CRM pipelines", "Consultation booking and reminders", "Thought-leadership content and SEO"]),
-    ("wellness", "Hospitality & Wellness", "Salons, gyms, spas and hotels live on repeat visits and recommendations.",
-     ["Online booking with deposits", "Memberships and recurring billing", "Loyalty and reactivation campaigns"]),
+    ("hospitality", "Hospitality & Travel", "Hotels, restaurants and travel businesses win on fast replies, smooth bookings and great reviews.",
+     ["Booking enquiries answered instantly by AI", "Pre-arrival and follow-up messages", "Review requests after every stay or visit"]),
     ("automotive", "Automotive", "Dealerships and workshops handle test drives, service bookings and many follow-ups.",
      ["Test drive and service booking", "Service reminder campaigns", "AI answering for after-hours enquiries"]),
 ]
@@ -461,8 +495,8 @@ INDUSTRIES = [
 # Search titles and descriptions for the main pages. Titles get " | Hemavik" appended.
 PAGES = {
     "index": ("Digital Marketing, CRM Automation & AI Agents", "Digital marketing, Google and Meta ads, CRM and marketing automation, websites, AI workflows and Voice AI agents for growing businesses in India and worldwide."),
-    "services": ("Digital Marketing, Automation & AI Services", "Explore 11 services: digital marketing, Google and Meta ads, reviews, CRM, marketing automation, booking, websites, payments, AI workflows, Voice AI and AI chat."),
-    "industries": ("Marketing & AI Automation by Industry", "Marketing, CRM automation and AI agents for healthcare, real estate, education, home services, retail, professional services, wellness and automotive businesses."),
+    "services": ("Digital Marketing, Automation & AI Services", "Explore 12 services: digital marketing, Google and Meta ads, reviews, CRM, marketing automation, booking, websites, payments, AI workflows, app integrations, Voice AI and AI chat."),
+    "industries": ("Marketing & AI Automation by Industry", "Marketing, CRM automation and AI agents for healthcare, real estate, education, home services, retail, professional services, hospitality and automotive businesses."),
     "insights": ("Insights on Marketing Automation & AI", "Practical articles on speed to lead, Voice AI receptionists, marketing automation and building one connected system for marketing, sales and service."),
     "about": ("About Us: Marketing, Automation & AI Company", "Hemavik means gold in Sanskrit. We build connected marketing, automation and AI systems for growing businesses, and you own every account and workflow."),
     "contact": ("Contact Us: Book a Free Strategy Call", "Book a free 30-minute strategy call with Hemavik. Tell us about your leads and tools and we will reply within one working day with next steps."),

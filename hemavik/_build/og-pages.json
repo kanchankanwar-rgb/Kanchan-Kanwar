@@ -59,6 +59,10 @@
     "eyebrow": "AI & Automation",
     "title": "AI-Powered Workflows"
   },
+  "integrations": {
+    "eyebrow": "AI & Automation",
+    "title": "Third-Party Integrations"
+  },
   "voice-ai": {
     "eyebrow": "AI & Automation",
     "title": "Voice AI Agents"

@@ -695,3 +695,14 @@ html.js-rv .rv.in { opacity: 1; transform: none; }
 .steps.in::after, html:not(.js-rv) .steps::after { transform: scaleX(1); }
 .founder, .founder-about { overflow-x: clip; }
 @media (max-width: 520px) { .founder-photo::before { inset: 12px -10px -12px 10px; } }
+
+/* Integrations mockup */
+.integ { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; position: relative; }
+.integ .app { display: flex; align-items: center; gap: 8px; padding: 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.integ .app i { width: 30px; height: 26px; border-radius: 6px; display: grid; place-items: center; font: normal 600 0.56rem var(--font-mono); background: color-mix(in srgb, var(--accent) 14%, var(--bg)); color: var(--accent); flex: none; }
+.integ .app span { font-size: 0.74rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.integ .hubdot { grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 8px; font: 500 0.68rem var(--font-mono); color: var(--state); padding: 6px; border-block: 1px dashed var(--marble); }
+.synclog { display: grid; gap: 6px; }
+.synclog p { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; align-items: baseline; font-size: 0.72rem; padding: 7px 9px; background: var(--surface); border-radius: 6px; }
+.synclog b { font-weight: 600; }
+.synclog small { font: 0.62rem var(--font-mono); color: var(--muted); }
