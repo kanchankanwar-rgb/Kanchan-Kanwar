@@ -5,12 +5,13 @@ Usage (from the hemavik/ folder):  python3 _build/build.py
 Writes static HTML pages, sitemap.xml and robots.txt next to this folder.
 """
 import html
+import json
 import os
 import sys
 from datetime import date
 
 sys.path.insert(0, os.path.dirname(__file__))
-from content import SITE, CATEGORIES, SERVICES, INDUSTRIES, PROCESS, COMMITMENTS, INSIGHTS  # noqa: E402
+from content import SITE, CATEGORIES, SERVICES, INDUSTRIES, PROCESS, COMMITMENTS, INSIGHTS, PAGES  # noqa: E402
 from visuals import visual, thumb  # noqa: E402
 
 OUT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -50,27 +51,91 @@ MOUNTAINS = """<svg class="peaks" viewBox="0 0 1440 360" preserveAspectRatio="xM
 </svg>"""
 
 
-def head(title, desc, r, path):
-    canonical = SITE["url"] + "/" + path.replace("index.html", "")
+ORG_ID = SITE["url"] + "/#organization"
+OG = {}  # og image key -> (eyebrow, title); rendered by _build/og-images.cjs
+
+
+def url_of(path):
+    return SITE["url"] + "/" + path.replace("index.html", "")
+
+
+def og_spec(key, eyebrow, title):
+    OG[key] = {"eyebrow": eyebrow, "title": title}
+    return key
+
+
+def ld_org():
+    return {
+        "@context": "https://schema.org", "@type": "Organization", "@id": ORG_ID,
+        "name": SITE["name"], "url": SITE["url"] + "/", "email": SITE["email"],
+        "logo": SITE["url"] + "/assets/logo/hemavik-logo-512.png",
+        "description": "Digital marketing, CRM and marketing automation, websites, AI workflows and Voice AI agents for growing businesses.",
+        "slogan": SITE["tagline"],
+        "areaServed": ["IN", "Worldwide"],
+        "knowsAbout": [SERVICES[x]["title"] for c in CATEGORIES for x in c["services"]],
+        "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "email": SITE["email"], "availableLanguage": ["English", "Hindi"]},
+    }
+
+
+def ld_website():
+    return {"@context": "https://schema.org", "@type": "WebSite", "@id": SITE["url"] + "/#website",
+            "name": SITE["name"], "url": SITE["url"] + "/", "publisher": {"@id": ORG_ID}, "inLanguage": "en"}
+
+
+def ld_crumbs(crumbs, path):
+    items = []
+    for i, (name, href) in enumerate(crumbs, 1):
+        items.append({"@type": "ListItem", "position": i, "name": name, "item": url_of(href or path)})
+    return {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": items}
+
+
+def ld_page(kind, name, desc, path):
+    return {"@context": "https://schema.org", "@type": kind, "name": name, "description": desc,
+            "url": url_of(path), "isPartOf": {"@id": SITE["url"] + "/#website"}, "publisher": {"@id": ORG_ID}}
+
+
+def head(title, desc, r, path, ld=(), og="index", noindex=False, ogtype="website"):
+    full = f"{title} | {SITE['name']}"
+    canonical = url_of(path)
+    img = f'{SITE["url"]}/assets/og/{og}.png'
+    scripts = "\n".join(
+        f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in ld
+    )
+    robots = "noindex, follow" if noindex else "index, follow, max-image-preview:large, max-snippet:-1"
     return f"""<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>{e(title)}</title>
+<title>{e(full)}</title>
 <meta name="description" content="{e(desc)}">
+<meta name="robots" content="{robots}">
 <link rel="canonical" href="{canonical}">
+<meta property="og:site_name" content="{SITE['name']}">
+<meta property="og:locale" content="{SITE['locale']}">
+<meta property="og:type" content="{ogtype}">
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
-<meta property="og:type" content="website">
 <meta property="og:url" content="{canonical}">
+<meta property="og:image" content="{img}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{e(title)} · Hemavik">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{e(title)}">
+<meta name="twitter:description" content="{e(desc)}">
+<meta name="twitter:image" content="{img}">
 <meta name="theme-color" content="#F5F8FB">
 <link rel="icon" href="{r}assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{r}assets/logo/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="{r}assets/logo/apple-touch-icon.png">
+<link rel="manifest" href="{r}site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="{r}assets/css/hemavik.css">
 <link rel="stylesheet" href="{r}assets/css/site.css">
+{scripts}
 </head>
 <body>
 {MARK}
@@ -172,7 +237,7 @@ def footer(r):
     </div>
   </div>
 </footer>
-<script src="{r}assets/js/site.js"></script>
+<script src="{r}assets/js/site.js" defer></script>
 </body>
 </html>
 """
@@ -267,7 +332,8 @@ def home():
   </div>
 </section>
 
-<section class="featured">
+<section class="featured" aria-labelledby="featured-h">
+  <h2 class="sr-only" id="featured-h">Featured services</h2>
   <div class="wrap feature-grid">{feat}</div>
 </section>
 
@@ -316,9 +382,8 @@ def home():
 </section>
 """
     return (
-        head("Hemavik · Digital Marketing, Automation & AI Agents",
-             "Hemavik delivers digital marketing, Google and Meta ads, CRM and marketing automation, websites, AI workflows and Voice AI agents on one connected platform.",
-             r, "index.html")
+        head(*PAGES["index"], r, "index.html", ld=[ld_org(), ld_website()],
+             og=og_spec("index", "Marketing · Automation · AI", "Pure systems. Golden growth."))
         + header(r) + body + cta_band(r) + footer(r)
     )
 
@@ -345,10 +410,16 @@ def services_index():
   </div>
 </section>""")
     jump = "".join(f'<a class="chip" href="#{c["slug"]}">{e(c["title"])}</a>' for c in CATEGORIES)
+    crumbs = [("Home", "index.html"), ("Services", None)]
     hero = page_hero("Services", "Everything you need to grow, connected",
                      "From the first ad a customer sees to the invoice they pay, we design, build and run the systems in between.",
-                     [("Home", "index.html"), ("Services", None)], r, f'<div class="jump">{jump}</div>')
-    return (head("Services · Hemavik", "Digital marketing, paid ads, CRM and marketing automation, websites, payments, AI workflows, Voice AI and chat agents.", r, "services.html")
+                     crumbs, r, f'<div class="jump">{jump}</div>')
+    items = {"@context": "https://schema.org", "@type": "ItemList", "name": "Hemavik services",
+             "itemListElement": [{"@type": "ListItem", "position": i, "name": SERVICES[x]["title"], "url": url_of(f"services/{x}.html")}
+                                 for i, x in enumerate((x for c in CATEGORIES for x in c["services"]), 1)]}
+    return (head(*PAGES["services"], r, "services.html",
+                 ld=[ld_page("CollectionPage", "Services", PAGES["services"][1], "services.html"), items, ld_crumbs(crumbs, "services.html")],
+                 og=og_spec("services", "Services", "Everything you need to grow, connected"))
             + header(r, "services") + hero + "\n".join(blocks) + cta_band(r) + footer(r))
 
 
@@ -367,8 +438,8 @@ def service_page(slug):
         for x in s["related"]
     )
     extra = f'<div class="hero-cta"><a class="btn btn-primary" href="{r}contact.html">Talk to an expert</a><a class="btn btn-ghost" href="#deliver">What we deliver</a></div>'
-    hero = page_hero(c["title"], e(s["title"]), s["short"],
-                     [("Home", "index.html"), ("Services", "services.html"), (s["title"], None)], r, extra, visual(slug))
+    crumbs = [("Home", "index.html"), ("Services", "services.html"), (s["title"], None)]
+    hero = page_hero(c["title"], e(s["title"]), s["short"], crumbs, r, extra, visual(slug))
     body = f"""<section class="section intro-block">
   <div class="wrap intro-grid">
     <p class="eyebrow">Overview</p>
@@ -419,7 +490,18 @@ def service_page(slug):
   </div>
 </section>
 """
-    return (head(f'{s["title"]} · Hemavik', s["short"], r, f"services/{slug}.html")
+    path = f"services/{slug}.html"
+    service_ld = {
+        "@context": "https://schema.org", "@type": "Service", "name": s["title"], "serviceType": s["title"],
+        "description": s["intro"], "url": url_of(path), "provider": {"@type": "Organization", "@id": ORG_ID, "name": SITE["name"], "url": SITE["url"] + "/"},
+        "areaServed": ["IN", "Worldwide"], "category": c["title"],
+        "hasOfferCatalog": {"@type": "OfferCatalog", "name": s["title"],
+                            "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": t, "description": d}} for t, d in s["deliver"]]},
+    }
+    faq_ld = {"@context": "https://schema.org", "@type": "FAQPage",
+              "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in s["faqs"]]}
+    return (head(s["seo_title"], s["seo_desc"], r, path, ld=[service_ld, faq_ld, ld_crumbs(crumbs, path)],
+                 og=og_spec(slug, c["title"], s["title"]))
             + header(r, "services") + hero + body
             + cta_band(r, f'Talk to us about {s["title"]}') + footer(r))
 
@@ -440,14 +522,21 @@ def industries_page():
                      "Every industry wins customers differently. We shape marketing, automation and AI agents around the way yours works.",
                      [("Home", "index.html"), ("Industries", None)], r)
     body = f'<section class="section"><div class="wrap ind-rows">{rows}</div></section>'
-    return (head("Industries · Hemavik", "Marketing, automation and AI for healthcare, real estate, education, home services, retail, professional services, wellness and automotive.", r, "industries.html")
+    crumbs = [("Home", "index.html"), ("Industries", None)]
+    return (head(*PAGES["industries"], r, "industries.html",
+                 ld=[ld_page("CollectionPage", "Industries", PAGES["industries"][1], "industries.html"), ld_crumbs(crumbs, "industries.html")],
+                 og=og_spec("industries", "Industries", "Built for businesses that run on conversations"))
             + header(r, "industries") + hero + body + cta_band(r) + footer(r))
+
+
+def nice_date(iso):
+    return date.fromisoformat(iso).strftime("%d %b %Y").lstrip("0")
 
 
 def insight_card(a, r):
     return f"""<a class="insight" href="{r}insights/{a["slug"]}.html">
       <div class="cover cover-{a["slug"]}" aria-hidden="true">{MOUNTAINS}<span>{e(a["tag"])}</span></div>
-      <span class="feature-tag">{e(a["tag"])} · {e(a["read"])}</span>
+      <span class="feature-tag">{e(a["tag"])} · <time datetime="{a["date"]}">{nice_date(a["date"])}</time> · {e(a["read"])}</span>
       <h3>{e(a["title"])}</h3>
       <p>{e(a["summary"])}</p>
       <span class="feature-go">Read {arrow()}</span>
@@ -459,8 +548,11 @@ def insights_page():
     hero = page_hero("Insights", "Perspectives on growth, automation and AI",
                      "Practical thinking from the systems we build every day.",
                      [("Home", "index.html"), ("Insights", None)], r)
-    body = f'<section class="section"><div class="wrap insight-grid">{"".join(insight_card(a, r) for a in INSIGHTS)}</div></section>'
-    return (head("Insights · Hemavik", "Articles on speed to lead, Voice AI, marketing automation and building connected growth systems.", r, "insights.html")
+    body = f'<section class="section"><div class="wrap"><div class="section-head"><p class="eyebrow">Latest</p><h2>All articles</h2></div><div class="insight-grid">{"".join(insight_card(a, r) for a in INSIGHTS)}</div></div></section>'
+    crumbs = [("Home", "index.html"), ("Insights", None)]
+    return (head(*PAGES["insights"], r, "insights.html",
+                 ld=[ld_page("CollectionPage", "Insights", PAGES["insights"][1], "insights.html"), ld_crumbs(crumbs, "insights.html")],
+                 og=og_spec("insights", "Insights", "Perspectives on growth, automation and AI"))
             + header(r, "insights") + hero + body + cta_band(r) + footer(r))
 
 
@@ -468,15 +560,26 @@ def article_page(a):
     r = "../"
     paras = "".join(f"<p>{e(p)}</p>" for p in a["body"])
     others = "".join(insight_card(x, r) for x in INSIGHTS if x["slug"] != a["slug"])
-    hero = page_hero(f'{a["tag"]} · {a["read"]}', e(a["title"]), a["summary"],
-                     [("Home", "index.html"), ("Insights", "insights.html"), (a["tag"], None)], r)
+    crumbs = [("Home", "index.html"), ("Insights", "insights.html"), (a["title"], None)]
+    hero = page_hero(f'{a["tag"]} · {nice_date(a["date"])} · {a["read"]}', e(a["title"]), a["summary"],
+                     [("Home", "index.html"), ("Insights", "insights.html"), (a["tag"], None)], r,
+                     f'<p class="byline">By {e(SITE["author"])} · <time datetime="{a["date"]}">{nice_date(a["date"])}</time></p>')
     body = f"""<section class="section"><div class="wrap"><article class="article">{paras}</article></div></section>
 <section class="section section-raised"><div class="wrap">
   <div class="section-head"><p class="eyebrow">Keep reading</p><h2>More insights</h2></div>
   <div class="insight-grid insight-grid-2">{others}</div>
 </div></section>
 """
-    return (head(f'{a["title"]} · Hemavik', a["summary"], r, f'insights/{a["slug"]}.html')
+    path = f'insights/{a["slug"]}.html'
+    art = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": a["title"], "description": a["summary"],
+           "datePublished": a["date"], "dateModified": a["date"], "url": url_of(path), "mainEntityOfPage": url_of(path),
+           "image": f'{SITE["url"]}/assets/og/{a["slug"]}.png', "articleSection": a["tag"], "inLanguage": "en",
+           "wordCount": sum(len(p.split()) for p in a["body"]),
+           "author": {"@type": "Organization", "name": SITE["author"], "url": SITE["url"] + "/about.html"},
+           "publisher": {"@id": ORG_ID, "@type": "Organization", "name": SITE["name"],
+                         "logo": {"@type": "ImageObject", "url": SITE["url"] + "/assets/logo/hemavik-logo-512.png"}}}
+    return (head(a["seo_title"], a["seo_desc"], r, path, ld=[art, ld_crumbs(crumbs, path)],
+                 og=og_spec(a["slug"], f'Insights · {a["tag"]}', a["title"]), ogtype="article")
             + header(r, "insights") + hero + body + cta_band(r) + footer(r))
 
 
@@ -526,7 +629,10 @@ def about_page():
   </div>
 </section>
 """
-    return (head("About · Hemavik", "Hemavik means gold in Sanskrit. We build connected marketing, automation and AI systems for growing businesses.", r, "about.html")
+    crumbs = [("Home", "index.html"), ("About", None)]
+    return (head(*PAGES["about"], r, "about.html",
+                 ld=[ld_page("AboutPage", "About Hemavik", PAGES["about"][1], "about.html"), ld_org(), ld_crumbs(crumbs, "about.html")],
+                 og=og_spec("about", "About Hemavik", "Named for gold. Built for purity."))
             + header(r, "about") + hero + body + cta_band(r) + footer(r))
 
 
@@ -572,8 +678,21 @@ def contact_page():
   </div>
 </section>
 """
-    return (head("Contact · Hemavik", "Book a free strategy call with Hemavik. We reply within one working day.", r, "contact.html")
+    crumbs = [("Home", "index.html"), ("Contact", None)]
+    return (head(*PAGES["contact"], r, "contact.html",
+                 ld=[ld_page("ContactPage", "Contact Hemavik", PAGES["contact"][1], "contact.html"), ld_crumbs(crumbs, "contact.html")],
+                 og=og_spec("contact", "Contact", "Book a free strategy call"))
             + header(r) + hero + body + footer(r))
+
+
+def not_found_page():
+    r = "/"
+    links = "".join(f'<a class="chip" href="/{h}">{e(t)}</a>' for t, h in
+                    [("Home", ""), ("Services", "services.html"), ("Industries", "industries.html"), ("Insights", "insights.html"), ("Contact", "contact.html")])
+    hero = page_hero("Error 404", "This page has moved or never existed",
+                     "The link may be old or mistyped. These pages will get you back on track.",
+                     [("Home", "index.html"), ("Page not found", None)], "/", f'<div class="jump">{links}</div>')
+    return head("Page not found", "The page you are looking for could not be found.", r, "404.html", noindex=True) + header(r) + hero + footer(r)
 
 
 def write(path, text):
@@ -599,11 +718,20 @@ def main():
     for a in INSIGHTS:
         pages.append(write(f"insights/{a['slug']}.html", article_page(a)))
 
+    write("404.html", not_found_page())
+    today = date.today().isoformat()
     urls = "".join(
-        f"  <url><loc>{SITE['url']}/{p.replace('index.html', '')}</loc></url>\n" for p in pages
+        f"  <url><loc>{url_of(p)}</loc><lastmod>{today}</lastmod></url>\n" for p in pages
     )
+    write("site.webmanifest", json.dumps({
+        "name": SITE["name"], "short_name": SITE["name"], "start_url": "/", "display": "browser",
+        "background_color": "#F5F8FB", "theme_color": "#1F2E44",
+        "icons": [{"src": "/assets/logo/apple-touch-icon.png", "sizes": "180x180", "type": "image/png"},
+                  {"src": "/assets/logo/hemavik-logo-512.png", "sizes": "512x512", "type": "image/png"}],
+    }, indent=2) + "\n")
+    write("_build/og-pages.json", json.dumps(OG, indent=2, ensure_ascii=False) + "\n")
     write("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
-    write("robots.txt", f"User-agent: *\nAllow: /\nDisallow: /_build/\nDisallow: /brand-board.html\n\nSitemap: {SITE['url']}/sitemap.xml\n")
+    write("robots.txt", f"User-agent: *\nAllow: /\nDisallow: /_build/\n\nSitemap: {SITE['url']}/sitemap.xml\n")
     print(f"Built {len(pages)} pages")
 
 

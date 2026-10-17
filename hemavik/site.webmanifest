@@ -1,0 +1,20 @@
+{
+  "name": "Hemavik",
+  "short_name": "Hemavik",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F5F8FB",
+  "theme_color": "#1F2E44",
+  "icons": [
+    {
+      "src": "/assets/logo/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/logo/hemavik-logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

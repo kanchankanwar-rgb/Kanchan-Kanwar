@@ -6,6 +6,8 @@ SITE = {
     "email": "hello@hemavik.com",
     "hours": "Mon to Sat, 10:00 to 19:00 IST",
     "tagline": "Pure systems. Golden growth.",
+    "author": "Hemavik Team",
+    "locale": "en_IN",
 }
 
 CATEGORIES = [
@@ -37,6 +39,8 @@ CATEGORIES = [
 
 SERVICES = {
     "digital-marketing": {
+        "seo_title": "Digital Marketing Agency: SEO, Social & Content",
+        "seo_desc": "Digital marketing services covering strategy, SEO, local SEO, social media management and content, with every lead tracked to revenue. Book a free audit.",
         "title": "Digital Marketing",
         "short": "Strategy, SEO, content and social media that bring the right people to you.",
         "intro": "We plan and run your marketing as one programme: who you want to reach, what you say to them and where you say it. Every channel feeds the same CRM, so you can see which efforts bring in revenue and which only bring in likes.",
@@ -69,6 +73,8 @@ SERVICES = {
         "related": ["google-meta-ads", "marketing-automation", "reputation-management"],
     },
     "google-meta-ads": {
+        "seo_title": "Google Ads & Meta Ads Management Services",
+        "seo_desc": "Google Ads, YouTube, Facebook and Instagram ad management with full conversion tracking. Lower cost per lead and every lead followed up instantly.",
         "title": "Google & Meta Ads",
         "short": "Paid campaigns on Google, YouTube, Facebook and Instagram, measured to the booked call.",
         "intro": "We build and manage paid campaigns that send people to pages designed to convert, then follow up with every lead automatically. You see cost per lead and cost per booked appointment, not only clicks and impressions.",
@@ -101,6 +107,8 @@ SERVICES = {
         "related": ["digital-marketing", "website-development", "crm-automation"],
     },
     "reputation-management": {
+        "seo_title": "Online Reputation & Google Review Management",
+        "seo_desc": "Get more Google reviews automatically, reply to every review with AI assistance and strengthen your Google Business Profile. Reputation management that runs itself.",
         "title": "Reputation & Reviews",
         "short": "More reviews, faster replies and a stronger Google profile.",
         "intro": "Most happy customers never leave a review because nobody asks at the right moment. We automate review requests after every visit or sale, help you reply to every review, and give every customer a private way to raise a problem.",
@@ -133,6 +141,8 @@ SERVICES = {
         "related": ["digital-marketing", "marketing-automation", "appointment-automation"],
     },
     "crm-automation": {
+        "seo_title": "CRM Setup & Sales Automation Services",
+        "seo_desc": "CRM setup with sales pipelines, a unified inbox for SMS, WhatsApp, email and social, lead scoring and automated follow-up. Data migration and training included.",
         "title": "CRM & Sales Automation",
         "short": "One CRM for every lead, conversation and deal, with follow-up that runs itself.",
         "intro": "We set up a CRM around how your team actually sells: pipelines that match your stages, one inbox for calls, SMS, WhatsApp, email and social messages, and automations that move deals forward when people forget.",
@@ -165,6 +175,8 @@ SERVICES = {
         "related": ["marketing-automation", "ai-workflows", "conversational-ai"],
     },
     "marketing-automation": {
+        "seo_title": "Email, SMS & WhatsApp Marketing Automation",
+        "seo_desc": "Marketing automation services: lead nurture journeys, email campaigns, SMS and WhatsApp messaging, missed-call text back and reactivation campaigns.",
         "title": "Marketing Automation",
         "short": "Email, SMS and WhatsApp journeys that nurture leads until they are ready to buy.",
         "intro": "We build automated journeys that send the right message at the right time: a welcome series for new leads, reminders for quotes not yet accepted, re-engagement for cold contacts and win-back offers for past customers.",
@@ -197,6 +209,8 @@ SERVICES = {
         "related": ["crm-automation", "appointment-automation", "digital-marketing"],
     },
     "appointment-automation": {
+        "seo_title": "Online Appointment Booking & Reminder Automation",
+        "seo_desc": "Online booking calendars, automated SMS, WhatsApp and email reminders, no-show recovery and deposits. Let customers book 24/7 and cut no-shows.",
         "title": "Appointments & Booking",
         "short": "Online booking, reminders and no-show recovery for every calendar in your team.",
         "intro": "Let customers book themselves at any hour, from your website, ads, social profiles or a chat. Confirmations, reminders and reschedule links go out automatically, and missed appointments trigger a follow-up instead of a lost customer.",
@@ -229,6 +243,8 @@ SERVICES = {
         "related": ["voice-ai", "crm-automation", "commerce-memberships"],
     },
     "website-development": {
+        "seo_title": "Website, Landing Page & Funnel Development",
+        "seo_desc": "Fast, mobile-first websites, landing pages and sales funnels with SEO-ready structure, CRM-connected forms and tracking from day one.",
         "title": "Website & Funnel Development",
         "short": "Fast, mobile-first websites and landing pages built to turn visitors into enquiries.",
         "intro": "We design and build websites, landing pages and sales funnels that load fast, read well on a phone and lead visitors to one clear next step. Every form connects to your CRM, and tracking is in place from launch day.",
@@ -261,6 +277,8 @@ SERVICES = {
         "related": ["google-meta-ads", "digital-marketing", "commerce-memberships"],
     },
     "commerce-memberships": {
+        "seo_title": "Online Payments, Course & Membership Platforms",
+        "seo_desc": "Sell online with checkout pages, invoices and text-to-pay, subscriptions, online courses and private member communities, all in one platform.",
         "title": "Payments, Courses & Communities",
         "short": "Sell online with payment links, invoices, subscriptions, courses and member communities.",
         "intro": "Take payments and deliver digital products from the same system that runs your marketing. Send invoices that customers pay by text, sell subscriptions, and host courses and private communities for your members.",
@@ -293,6 +311,8 @@ SERVICES = {
         "related": ["website-development", "marketing-automation", "appointment-automation"],
     },
     "ai-workflows": {
+        "seo_title": "AI Workflow Automation & Integration Services",
+        "seo_desc": "AI workflow automation that connects your CRM, forms, sheets, accounting and messaging tools. AI document processing, lead routing and internal assistants.",
         "title": "AI-Powered Workflows",
         "short": "Automations that connect your tools and use AI to read, decide and act.",
         "intro": "We find the repetitive work in your business and automate it. Workflows connect your CRM, forms, spreadsheets, accounting and messaging tools, with AI steps that summarise, classify, extract data and draft replies.",
@@ -325,6 +345,8 @@ SERVICES = {
         "related": ["crm-automation", "voice-ai", "conversational-ai"],
     },
     "voice-ai": {
+        "seo_title": "Voice AI Agents & AI Receptionist Services",
+        "seo_desc": "Voice AI agents that answer every call 24/7, qualify callers, book appointments and log transcripts in your CRM. Multilingual, including Hindi.",
         "title": "Voice AI Agents",
         "short": "AI receptionists that answer calls, qualify callers and book appointments, 24/7.",
         "intro": "A Voice AI agent answers every call in a natural voice. It handles common questions using your business information, captures caller details in the CRM and books appointments straight into your calendar. Complex calls go to your team.",
@@ -357,6 +379,8 @@ SERVICES = {
         "related": ["conversational-ai", "appointment-automation", "ai-workflows"],
     },
     "conversational-ai": {
+        "seo_title": "AI Chatbot for Website, WhatsApp & Instagram",
+        "seo_desc": "AI chat agents for your website, WhatsApp, Instagram and Facebook that answer questions, capture leads and book appointments, with human handover.",
         "title": "Conversational AI & Chat",
         "short": "AI chat agents for your website, WhatsApp, Instagram and Facebook that answer and book.",
         "intro": "Customers message you on many channels and expect a fast reply. Our AI chat agents answer questions from your knowledge base, capture contact details, book appointments and hand over to your team in the same inbox when a person is needed.",
@@ -409,6 +433,16 @@ INDUSTRIES = [
      ["Test drive and service booking", "Service reminder campaigns", "AI answering for after-hours enquiries"]),
 ]
 
+# Search titles and descriptions for the main pages. Titles get " | Hemavik" appended.
+PAGES = {
+    "index": ("Digital Marketing, CRM Automation & AI Agents", "Digital marketing, Google and Meta ads, CRM and marketing automation, websites, AI workflows and Voice AI agents for growing businesses in India and worldwide."),
+    "services": ("Digital Marketing, Automation & AI Services", "Explore 11 services: digital marketing, Google and Meta ads, reviews, CRM, marketing automation, booking, websites, payments, AI workflows, Voice AI and AI chat."),
+    "industries": ("Marketing & AI Automation by Industry", "Marketing, CRM automation and AI agents for healthcare, real estate, education, home services, retail, professional services, wellness and automotive businesses."),
+    "insights": ("Insights on Marketing Automation & AI", "Practical articles on speed to lead, Voice AI receptionists, marketing automation and building one connected system for marketing, sales and service."),
+    "about": ("About Us: Marketing, Automation & AI Company", "Hemavik means gold in Sanskrit. We build connected marketing, automation and AI systems for growing businesses, and you own every account and workflow."),
+    "contact": ("Contact Us: Book a Free Strategy Call", "Book a free 30-minute strategy call with Hemavik. Tell us about your leads and tools and we will reply within one working day with next steps."),
+}
+
 PROCESS = [
     ("Assay", "A free audit of your tools, lead flow and campaigns. We find where leads and hours leak."),
     ("Refine", "A written blueprint covering systems, automations and campaigns, with a fixed quote and timeline."),
@@ -427,6 +461,9 @@ COMMITMENTS = [
 INSIGHTS = [
     {
         "slug": "speed-to-lead",
+        "seo_title": "Speed to Lead: Why the First 5 Minutes Decide the Sale",
+        "seo_desc": "A lead is most interested the moment they reach out. Learn how instant SMS, WhatsApp and AI replies help you respond first and win more sales.",
+        "date": "2026-10-17",
         "tag": "Sales",
         "title": "Speed to lead: why the first five minutes decide the sale",
         "summary": "A lead is most interested at the moment they reach out. Here is how to respond before that interest fades.",
@@ -440,6 +477,9 @@ INSIGHTS = [
     },
     {
         "slug": "voice-ai-receptionist",
+        "seo_title": "Voice AI Receptionists: What They Do Well",
+        "seo_desc": "What AI voice agents handle well, where people still matter, and how to roll out an AI receptionist that answers every call and books appointments.",
+        "date": "2026-10-17",
         "tag": "AI",
         "title": "Voice AI receptionists: what they do well, and where people still matter",
         "summary": "AI voice agents can answer every call. The best results come from giving them a clear, limited job.",
@@ -453,6 +493,9 @@ INSIGHTS = [
     },
     {
         "slug": "one-system",
+        "seo_title": "One System, Not Ten Tools: Simplify Your Stack",
+        "seo_desc": "Separate tools for forms, email, SMS, booking and payments create gaps where leads get lost. Here is how to consolidate into one connected system.",
+        "date": "2026-10-17",
         "tag": "Strategy",
         "title": "One system, not ten tools: simplifying your marketing stack",
         "summary": "Separate tools for forms, email, SMS, booking and payments create gaps. A connected system closes them.",

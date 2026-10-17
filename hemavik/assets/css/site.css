@@ -554,3 +554,4 @@ body::before {
   .mock-site { padding-right: 40px; }
   .mock.mobile { width: 90px; }
 }
+.byline { font: 0.8rem var(--font-mono); color: var(--muted); letter-spacing: .04em; }
