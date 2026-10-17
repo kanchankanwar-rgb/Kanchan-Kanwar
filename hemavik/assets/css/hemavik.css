@@ -1,21 +1,25 @@
 /* =========================================================
    Hemavik brand system
-   Layout concept: a night-indigo ground ("Neelkanth") lit by a
-   single gold thread; ivory bands are used sparingly for purity.
+   Layout concept: Kailash at dawn. Snow-white ground, glacier-blue
+   bands and slate shadows, taken from the Shiva on Kailash image.
+   A single thread of gold stays for "Hema", used sparingly.
    ========================================================= */
 :root {
-  /* Core palette */
-  --neelkanth: #0E1630;      /* deep indigo night, primary ground */
-  --neelkanth-2: #16213F;    /* raised surface */
-  --neelkanth-3: #22305A;    /* borders / hairlines on dark */
-  --hema: #D4A63A;           /* Hema gold, primary accent */
-  --hema-light: #F0D27A;     /* gold highlight */
-  --hema-deep: #9C7420;      /* gold on ivory (text-safe) */
-  --kailash: #F6F1E4;        /* ivory, purity */
-  --kailash-2: #ECE4CF;      /* ivory, raised */
-  --bhasma: #A7ADBD;         /* sacred-ash grey, secondary text */
-  --ink: #0B1124;            /* text on ivory */
-  --ganga: #3FA7A0;          /* teal, live / success state */
+  /* Core palette (sampled from the Kailash image) */
+  --bg: #F5F8FB;           /* Kailash Snow: page background */
+  --surface: #E7EEF5;      /* Cloud Mist: raised surfaces */
+  --line: #C9D6E3;         /* Mist Line: borders, hairlines */
+  --glacier: #A5BED4;      /* Glacier: bands, illustration */
+  --sky: #94A9BF;          /* Himalaya Sky: decorative, gradients */
+  --marble: #A0A3A9;       /* Marble: statue grey, secondary graphics */
+  --fg: #1F2E44;           /* Shila Slate: text, dark plates */
+  --muted: #536379;        /* Slate Mist: secondary text */
+  --accent: #3F6189;       /* Neelkanth Blue: logo, buttons, links */
+  --accent-hover: #2E4B6E; /* Neelkanth Deep: hover */
+  --on-accent: #F5F8FB;    /* text on Neelkanth Blue */
+  --gold: #A97C22;         /* Hema Gold: small highlights only */
+  --state: #2F7F79;        /* live / success */
+  --danger: #B4483A;       /* form errors */
 
   /* Type */
   --font-display: "Marcellus", "Cormorant Garamond", Georgia, serif;
@@ -32,25 +36,25 @@
 
   --radius: 6px;
   --max: 1160px;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: var(--neelkanth);
-  color: var(--kailash);
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--font-body);
   font-size: var(--step-0);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 img, svg { max-width: 100%; }
-a { color: var(--hema-light); }
+a { color: var(--accent); }
 a:focus-visible, button:focus-visible, input:focus-visible,
 select:focus-visible, textarea:focus-visible {
-  outline: 2px solid var(--hema-light);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 h1, h2, h3 {
@@ -80,13 +84,13 @@ p { margin: 0; }
   font-size: var(--step--1);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--hema);
+  color: var(--accent);
 }
-.lede { color: var(--bhasma); font-size: var(--step-1); max-width: 58ch; }
+.lede { color: var(--muted); font-size: var(--step-1); max-width: 58ch; }
 
 /* ---------- Logo ---------- */
-.logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--kailash); }
-.logo svg { width: 40px; height: 40px; color: var(--hema); flex: none; }
+.logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--fg); }
+.logo svg { width: 40px; height: 40px; color: var(--accent); flex: none; }
 .logo-word { display: flex; flex-direction: column; line-height: 1; }
 .logo-word b {
   font-family: var(--font-display);
@@ -106,12 +110,10 @@ p { margin: 0; }
   cursor: pointer;
   transition: background-color .2s, color .2s, border-color .2s, transform .2s;
 }
-.btn-gold { background: var(--hema); color: var(--ink); }
-.btn-gold:hover { background: var(--hema-light); }
-.btn-ghost { background: transparent; color: var(--kailash); border-color: var(--neelkanth-3); }
-.btn-ghost:hover { border-color: var(--hema); color: var(--hema-light); }
-.btn-ink { background: var(--ink); color: var(--kailash); }
-.btn-ink:hover { background: var(--neelkanth-2); }
+.btn-primary { background: var(--accent); color: var(--on-accent); }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-ghost { background: transparent; color: var(--fg); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent-hover); }
 
 /* ---------- Chips ---------- */
 .chip {
@@ -119,27 +121,27 @@ p { margin: 0; }
   font: 500 0.72rem/1 var(--font-mono);
   letter-spacing: 0.08em; text-transform: uppercase;
   padding: 6px 10px; border-radius: 999px;
-  border: 1px solid var(--neelkanth-3); color: var(--bhasma);
+  border: 1px solid var(--line); color: var(--muted);
 }
-.chip-live { color: var(--ganga); border-color: color-mix(in srgb, var(--ganga) 45%, transparent); }
+.chip-live { color: var(--state); border-color: color-mix(in srgb, var(--state) 45%, transparent); }
 .chip-live::before {
-  content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ganga);
+  content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--state);
 }
 
 /* ---------- Hallmark stamp (999 fine gold) ---------- */
 .hallmark {
   display: inline-grid; grid-auto-flow: column; align-items: stretch;
-  border: 1px solid var(--hema); border-radius: 3px;
+  border: 1px solid var(--gold); border-radius: 3px;
   font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em;
-  color: var(--hema);
+  color: var(--gold);
 }
 .hallmark span { padding: 5px 9px; }
-.hallmark span + span { border-left: 1px solid var(--hema); }
+.hallmark span + span { border-left: 1px solid var(--gold); }
 
 /* ---------- Gold thread divider ---------- */
 .thread {
   height: 1px; border: 0; margin: 0;
-  background: linear-gradient(90deg, transparent, var(--hema) 20%, var(--hema-light) 50%, var(--hema) 80%, transparent);
+  background: linear-gradient(90deg, transparent, var(--glacier) 20%, var(--gold) 50%, var(--glacier) 80%, transparent);
   opacity: .7;
 }
 

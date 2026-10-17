@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 96" role="img" aria-label="Hemavik">
-  <rect width="360" height="96" fill="#F6F1E4"/>
+  <rect width="360" height="96" fill="#F5F8FB"/>
   <g transform="translate(16 16)">
-  <circle cx="32" cy="32" r="29" fill="none" stroke="#9C7420" stroke-width="2.5"/>
-  <rect x="19" y="18" width="5" height="28" rx="1" fill="#9C7420"/>
-  <rect x="40" y="18" width="5" height="28" rx="1" fill="#9C7420"/>
-  <rect x="19" y="32" width="26" height="4" fill="#9C7420"/>
-  <path d="M26 24 A6 6 0 0 0 38 24 A6 3.5 0 0 1 26 24 Z" fill="#9C7420"/>
-  <circle cx="32" cy="41" r="2.2" fill="#9C7420"/>
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#3F6189" stroke-width="2.5"/>
+  <rect x="19" y="18" width="5" height="28" rx="1" fill="#3F6189"/>
+  <rect x="40" y="18" width="5" height="28" rx="1" fill="#3F6189"/>
+  <rect x="19" y="32" width="26" height="4" fill="#3F6189"/>
+  <path d="M26 24 A6 6 0 0 0 38 24 A6 3.5 0 0 1 26 24 Z" fill="#3F6189"/>
+  <circle cx="32" cy="41" r="2.2" fill="#3F6189"/>
   </g>
-  <text x="96" y="59" font-family="Marcellus, 'Cormorant Garamond', Georgia, serif" font-size="30" letter-spacing="6.5" fill="#0B1124">HEMAVIK</text>
+  <text x="96" y="59" font-family="Marcellus, 'Cormorant Garamond', Georgia, serif" font-size="30" letter-spacing="6.5" fill="#1F2E44">HEMAVIK</text>
 </svg>

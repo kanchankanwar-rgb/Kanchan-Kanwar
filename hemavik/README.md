@@ -13,18 +13,22 @@ The name comes from the Sanskrit *hema* (gold) and stands for three ideas: **mad
 | `assets/css/hemavik.css` | Brand tokens (colours, fonts, buttons, chips, hallmark). Shared by both pages |
 | `assets/css/site.css` | Website layout |
 | `assets/js/site.js` | Mobile menu and contact form |
-| `assets/logo/` | Logo lockups (dark, light), mark (gold, indigo), favicon |
+| `assets/logo/` | Logo lockups (dark, light), mark (blue, slate), favicon |
 
 ## Brand at a glance
 
+Colours are sampled from an image of Shiva meditating on Kailash: snow, clouds, glacier ice and slate shadow. Gold remains only as a small highlight for *hema*.
+
 | Token | Hex | Use |
 | --- | --- | --- |
-| Neelkanth | `#0E1630` | Primary background |
-| Hema Gold | `#D4A63A` | Logo, buttons, highlights |
-| Kailash Ivory | `#F6F1E4` | Text on dark, light sections |
-| Bhasma Ash | `#A7ADBD` | Secondary text |
-| Deep Gold | `#9C7420` | Gold on ivory |
-| Ganga Teal | `#3FA7A0` | Live / success states |
+| Kailash Snow | `#F5F8FB` | Page background |
+| Cloud Mist | `#E7EEF5` | Cards, panels, form fields |
+| Glacier | `#A5BED4` | Section bands, logo on slate |
+| Himalaya Sky | `#94A9BF` | Gradients, atmosphere |
+| Marble | `#A0A3A9` | Dividers, icons |
+| Neelkanth Blue | `#3F6189` | Logo, buttons, links |
+| Shila Slate | `#1F2E44` | Text, dark plates |
+| Hema Gold | `#A97C22` | 999 stamp, one highlight per page |
 
 Fonts (Google Fonts): **Marcellus** (headlines), **Manrope** (body), **JetBrains Mono** (labels).
 
