@@ -1,28 +1,41 @@
 (function () {
   // Mobile menu
-  var btn = document.getElementById('menu-btn');
+  var menuBtn = document.getElementById('menu-btn');
   var nav = document.getElementById('site-nav');
-  if (btn && nav) {
-    btn.addEventListener('click', function () {
+  if (menuBtn && nav) {
+    menuBtn.addEventListener('click', function () {
       var open = nav.classList.toggle('open');
-      btn.setAttribute('aria-expanded', String(open));
-    });
-    nav.addEventListener('click', function (e) {
-      if (e.target.closest('a')) {
-        nav.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-      }
+      menuBtn.setAttribute('aria-expanded', String(open));
     });
   }
 
-  var year = document.getElementById('year');
-  if (year) year.textContent = new Date().getFullYear();
+  // Services mega menu
+  var megaBtn = document.getElementById('mega-btn');
+  var mega = document.getElementById('mega');
+  function setMega(open) {
+    if (!mega) return;
+    mega.classList.toggle('open', open);
+    megaBtn.setAttribute('aria-expanded', String(open));
+  }
+  if (megaBtn && mega) {
+    megaBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      setMega(!mega.classList.contains('open'));
+    });
+    document.addEventListener('click', function (e) {
+      if (!mega.contains(e.target) && window.innerWidth > 960) setMega(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { setMega(false); megaBtn.focus(); }
+    });
+  }
 
-  // Contact form: posts JSON to an n8n / GoHighLevel webhook set in data-endpoint
+  // Contact form: posts JSON to the webhook set in data-endpoint
   var form = document.getElementById('contact-form');
   if (!form) return;
   var status = document.getElementById('form-status');
   var submit = document.getElementById('f-submit');
+  var email = 'hello@hemavik.com';
 
   function setStatus(msg, kind) {
     status.textContent = msg;
@@ -32,11 +45,11 @@
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var name = form.elements.name;
-    var email = form.elements.email;
+    var mail = form.elements.email;
     var bad = null;
-    [name, email].forEach(function (el) { el.removeAttribute('aria-invalid'); });
+    [name, mail].forEach(function (el) { el.removeAttribute('aria-invalid'); });
     if (!name.value.trim()) bad = name;
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) bad = email;
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail.value.trim())) bad = mail;
     if (bad) {
       bad.setAttribute('aria-invalid', 'true');
       bad.focus();
@@ -46,13 +59,14 @@
 
     var endpoint = form.dataset.endpoint;
     if (!endpoint) {
-      setStatus('This form is not connected yet. Please email hello@hemavik.com directly.', 'err');
+      setStatus('This form is not connected yet. Please email ' + email + ' directly.', 'err');
       return;
     }
 
     var data = {};
     new FormData(form).forEach(function (v, k) { data[k] = v; });
     data.source = 'hemavik.com contact form';
+    data.page = location.pathname;
     data.submittedAt = new Date().toISOString();
 
     submit.disabled = true;
@@ -66,7 +80,7 @@
       form.reset();
       setStatus('Thank you. We will reply within one working day.', 'ok');
     }).catch(function () {
-      setStatus('Your message could not be sent. Please email hello@hemavik.com.', 'err');
+      setStatus('Your message could not be sent. Please email ' + email + '.', 'err');
     }).finally(function () {
       submit.disabled = false;
     });

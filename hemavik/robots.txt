@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /_build/
+Disallow: /brand-board.html
+
+Sitemap: https://hemavik.com/sitemap.xml
