@@ -33,6 +33,12 @@ cd hemavik
 python3 _build/build.py      # regenerates every page, sitemap.xml and robots.txt
 ```
 
+After changing titles or adding pages, also regenerate the social share images and icons (needs Playwright with Chromium):
+
+```bash
+node _build/og-images.cjs    # writes assets/og/*.png and PNG icons
+```
+
 Do not edit the generated `.html` files by hand (except `brand-board.html`); changes would be overwritten on the next build. Styles live in `assets/css/hemavik.css` (brand tokens) and `assets/css/site.css` (layout).
 
 ## Brand at a glance
@@ -57,6 +63,25 @@ Fonts (Google Fonts): **Marcellus** (headlines), **Manrope** (body), **JetBrains
 1. **Email**: `hello@hemavik.com` is a placeholder. Change `SITE["email"]` in `_build/content.py` and the `email` variable in `assets/js/site.js`, then rebuild.
 2. **Contact form**: set `data-endpoint` on the form in the `contact_page()` template in `_build/build.py` to your automation webhook URL, then rebuild. The form POSTs JSON: `name, company, email, phone, service, message, source, page, submittedAt`. Until it is set, the form asks visitors to email you.
 3. **Logo SVGs**: the lockups use live text in Marcellus. For print, convert text to outlines in Figma or Illustrator.
+
+## SEO
+
+Built in:
+
+- Search titles and meta descriptions per page (`seo_title` / `seo_desc` in `content.py`, `PAGES` for main pages)
+- JSON-LD structured data: Organization, WebSite, Service + OfferCatalog, FAQPage, BreadcrumbList, BlogPosting, CollectionPage, ItemList, AboutPage, ContactPage
+- Open Graph and Twitter cards with a 1200×630 image per page (`assets/og/`)
+- Canonical URLs, robots meta, `sitemap.xml` with `lastmod`, `robots.txt`, `404.html` (noindex), brand board noindexed
+- One H1 per page, logical heading order, breadcrumbs, strong internal linking between services, industries and articles
+- Mobile-first, no layout-shifting images, deferred script, PNG + SVG icons and web manifest
+
+After launch:
+
+1. Add the site to **Google Search Console** and **Bing Webmaster Tools** and submit `https://hemavik.com/sitemap.xml`.
+2. Check a service page in Google's **Rich Results Test** to confirm the structured data.
+3. Create a **Google Business Profile** and add its link, plus LinkedIn/Instagram/Facebook pages, to `sameAs` in `ld_org()` in `_build/build.py`.
+4. Configure the host to serve `404.html` for missing pages and to redirect `www` to the bare domain (or the reverse) so only one version is indexed.
+5. Publish new articles regularly in `INSIGHTS`; each one adds an indexable page, a share image and internal links.
 
 ## Deploy
 
