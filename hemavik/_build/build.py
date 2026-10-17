@@ -196,6 +196,7 @@ def header(r, active=""):
 
 def cta_band(r, title="Let's build your growth system", text="Book a free assay. In 30 minutes we will map where your leads and hours are leaking, and what to fix first."):
     return f"""<section class="cta-band">
+  {MOUNTAINS}
   <div class="wrap cta-row">
     <div class="cta-copy">
       <p class="eyebrow">Start with an assay</p>

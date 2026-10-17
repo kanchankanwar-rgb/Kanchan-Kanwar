@@ -219,17 +219,21 @@ body::before {
 
 /* CTA band */
 .cta-band {
-  position: relative; overflow: hidden; color: var(--bg); padding-block: 88px;
+  position: relative; overflow: hidden; color: var(--on-accent); padding-block: 96px;
   background:
-    radial-gradient(ellipse 50% 80% at 100% 0%, color-mix(in srgb, var(--accent) 60%, transparent), transparent 70%),
-    var(--fg);
+    radial-gradient(ellipse 55% 90% at 100% 0%, color-mix(in srgb, var(--sky) 55%, transparent), transparent 70%),
+    linear-gradient(120deg, var(--accent-hover) 0%, var(--accent) 55%, color-mix(in srgb, var(--accent) 75%, var(--sky)) 100%);
 }
+.cta-band .peaks { height: 75%; opacity: .13; }
+.cta-band .pk-far, .cta-band .pk-mid { fill: var(--bg); }
+.cta-band .pk-snow, .cta-band .pk-cloud { display: none; }
+.cta-row { position: relative; }
 .cta-row { display: grid; gap: 32px; grid-template-columns: minmax(0, 1fr); align-items: center; }
 @media (min-width: 900px) { .cta-row { grid-template-columns: minmax(0, 1.4fr) auto; } }
 .cta-copy { display: grid; gap: 14px; }
-.cta-copy .eyebrow { color: var(--glacier); }
+.cta-copy .eyebrow { color: var(--on-accent); opacity: .85; }
 .cta-copy h2 { font-size: var(--step-3); }
-.cta-copy p { opacity: .85; max-width: 56ch; }
+.cta-copy p { opacity: .92; max-width: 56ch; }
 
 /* ---------- Inner page hero ---------- */
 .page-hero {
